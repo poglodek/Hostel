@@ -1,7 +1,15 @@
+using Hostel_System.Database;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<HostelSystemDbContext>(options =>
+    options.UseSqlServer("Server=.;Database=HostelSystem;Trusted_Connection=True;"));
 
 var app = builder.Build();
 
@@ -9,7 +17,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -17,6 +24,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+var scope = app.Services.CreateScope();
+scope.ServiceProvider.GetService<HostelSystemDbContext>().Database.Migrate();
+
 
 app.UseAuthorization();
 
