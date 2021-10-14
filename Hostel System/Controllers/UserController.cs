@@ -13,23 +13,23 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hostel_System.Controllers
 {
-    public class LoginController : Controller 
+    public class UserController : Controller 
     {
         private readonly IUserServices _userServices;
         private readonly HostelSystemModelMapper _mapper;
 
-        public LoginController(IUserServices userServices,
+        public UserController(IUserServices userServices,
             HostelSystemModelMapper mapper)
         {
             _userServices = userServices;
             _mapper = mapper;
         }
-        [HttpGet]
+        [HttpGet("/Login")]
         public IActionResult Index()
         {
             return View();
         }
-        [HttpPost]
+        [HttpPost("/Login")]
         public IActionResult Index(LoginModel loginModel)
         {
             if (!ModelState.IsValid)
@@ -38,19 +38,24 @@ namespace Hostel_System.Controllers
                 return View();
             }
 
-            return Ok("ok");
+            return Ok("TO DO");
         }
-        [HttpGet]
+        [HttpGet("/Register")]
         public IActionResult Register()
         {
             return View();
         }
-        [HttpPost]
+        [HttpPost("/Register")]
         public IActionResult Register(RegisterUserModel registerUserModel)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ErrorMessage = "All fields required!";
+                return View();
+            }
             var registerUserDto = _mapper.MapToDto(registerUserModel);
             _userServices.RegisterUser(registerUserDto);
-            return View();
+            return Ok("TO DO");
         }
     }
 }
