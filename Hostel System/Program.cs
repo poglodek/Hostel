@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<HostelSystemDbContext>(options =>
     options.UseSqlServer("Server=.;Database=HostelSystem;Trusted_Connection=True;"));
+;
 
 var app = builder.Build();
 

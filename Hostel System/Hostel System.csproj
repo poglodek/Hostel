@@ -26,4 +26,9 @@
     <ProjectReference Include="..\Hostel System.Database\Hostel System.Database.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\" />
+    <Folder Include="Views\Reservation\" />
+  </ItemGroup>
+
 </Project>
