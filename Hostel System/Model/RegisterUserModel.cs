@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hostel_System.Model
 {
-    public class RegisterModel
+    public class RegisterUserModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

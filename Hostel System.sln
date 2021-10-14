@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hostel System", "Hostel System\Hostel System.csproj", "{AFDCE0CD-0EAC-413E-AC3A-1BACFF7A2D2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hostel System", "Hostel System\Hostel System.csproj", "{AFDCE0CD-0EAC-413E-AC3A-1BACFF7A2D2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hostel System.Database", "Hostel System.Database\Hostel System.Database.csproj", "{442261B8-4A44-478A-A2A5-76D77C3DC787}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hostel System.Database", "Hostel System.Database\Hostel System.Database.csproj", "{442261B8-4A44-478A-A2A5-76D77C3DC787}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hostel System.Core", "Hostel System.Core\Hostel System.Core.csproj", "{65176976-1D4E-4CDF-8C00-9483ECB498E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hostel System.Core", "Hostel System.Core\Hostel System.Core.csproj", "{65176976-1D4E-4CDF-8C00-9483ECB498E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hostel System.Test", "Hostel System.Test\Hostel System.Test.csproj", "{5DD75977-76B3-4FBC-97D4-41C1C38B3CCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hostel System.Test", "Hostel System.Test\Hostel System.Test.csproj", "{5DD75977-76B3-4FBC-97D4-41C1C38B3CCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hostel System.Dto", "Hostel System.Dto\Hostel System.Dto.csproj", "{318ABCAD-90F1-4E9A-9F5A-33ED88742353}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{5DD75977-76B3-4FBC-97D4-41C1C38B3CCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DD75977-76B3-4FBC-97D4-41C1C38B3CCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DD75977-76B3-4FBC-97D4-41C1C38B3CCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{318ABCAD-90F1-4E9A-9F5A-33ED88742353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{318ABCAD-90F1-4E9A-9F5A-33ED88742353}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{318ABCAD-90F1-4E9A-9F5A-33ED88742353}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{318ABCAD-90F1-4E9A-9F5A-33ED88742353}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
