@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,7 +26,15 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Reservation" asp-action="Home">Reservation</a>
                         </li>
                     </ul>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Login In!</a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="nav-link text-dark" asp-area="" >@User.Claims.First(x => x.Type == ClaimTypes.Name).Value</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="SingOut">Sing out</a>
+                }
+                else
+                {
+                   <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Login In!</a>  
+                }
                 </div>
             </div>
         </nav>
