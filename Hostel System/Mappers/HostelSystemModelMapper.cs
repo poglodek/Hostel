@@ -17,6 +17,7 @@ namespace Hostel_System.Mappers
             _mapper = new MapperConfiguration(config =>
             {
                 config.CreateMap<RegisterUserModel, RegisterUserDto>().ReverseMap();
+                config.CreateMap<LoginModel, LoginDto>().ReverseMap();
             }).CreateMapper();
         }
 
@@ -24,6 +25,10 @@ namespace Hostel_System.Mappers
             _mapper.Map<RegisterUserModel>(registerUser);
         public RegisterUserDto MapToDto(RegisterUserModel registerUser) =>
             _mapper.Map<RegisterUserDto>(registerUser);
+        public LoginModel MapToModel(LoginDto login) =>
+            _mapper.Map<LoginModel>(login);
+        public LoginDto MapToDto(LoginModel login) =>
+            _mapper.Map<LoginDto>(login);
 
     }
 }

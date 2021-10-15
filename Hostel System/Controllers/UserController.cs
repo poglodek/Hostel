@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -9,6 +10,7 @@ using Hostel_System.Dto;
 using Hostel_System.Dto.Dto;
 using Hostel_System.Mappers;
 using Hostel_System.Model;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hostel_System.Controllers
@@ -30,15 +32,16 @@ namespace Hostel_System.Controllers
             return View();
         }
         [HttpPost("/Login")]
-        public IActionResult Index(LoginModel loginModel)
+        public async Task<IActionResult> Index(LoginModel loginModel)
         {
-            if (!ModelState.IsValid)
+            var user = _mapper.MapToDto(loginModel);
+            if (!ModelState.IsValid || !_userServices.VerifyUser(user))
             {
-                ViewBag.ErrorMessage = "Email and Password is required";
+                ViewBag.ErrorMessage = "Email and Password is wrong!";
                 return View();
             }
-
-            return Ok("TO DO");
+            await HttpContext.SignInAsync(_userServices.GetClaimsPrincipal(user));
+            return Ok(HttpContext.User.Claims.First(x => x.Type == ClaimTypes.Name).Value);
         }
         [HttpGet("/Register")]
         public IActionResult Register()
@@ -48,6 +51,7 @@ namespace Hostel_System.Controllers
         [HttpPost("/Register")]
         public IActionResult Register(RegisterUserModel registerUserModel)
         {
+
             if (!ModelState.IsValid)
             {
                 ViewBag.ErrorMessage = "All fields required!";

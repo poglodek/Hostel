@@ -43,7 +43,7 @@ app.UseRouting();
 var scope = app.Services.CreateScope();
 scope.ServiceProvider.GetService<HostelSystemDbContext>().Database.Migrate();
 
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
