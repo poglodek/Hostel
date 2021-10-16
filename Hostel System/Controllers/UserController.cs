@@ -47,7 +47,7 @@ namespace Hostel_System.Controllers
             }
 
             await HttpContext.SignInAsync(_userServices.GetClaimsPrincipal(user));
-            return RedirectToAction("Home");
+            return RedirectToAction("Index", "Home");
         }
         [AllowAnonymous]
 
@@ -76,10 +76,5 @@ namespace Hostel_System.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }
-       [HttpGet]
-        public IActionResult Home()
-        {
-            return View();
-        } 
     }
 }
