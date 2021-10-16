@@ -18,6 +18,5 @@ namespace Hostel_System.Dto.Dto
         public int Phone { get; set; }
         public string Address { get; set; }
         public string? CarRegistrationNumber { get; set; }
-        public Role RoleName { get; set; }
     }
 }

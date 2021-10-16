@@ -13,17 +13,14 @@ namespace Hostel_System.Core.Services
     public class RoleServices : IRoleServices
     {
         private readonly HostelSystemDbContext _hostelSystemDbContext;
-        private readonly IMapper _mapper;
 
-        public RoleServices(HostelSystemDbContext hostelSystemDbContext,
-            IMapper mapper)
+        public RoleServices(HostelSystemDbContext hostelSystemDbContext)
         {
             _hostelSystemDbContext = hostelSystemDbContext;
-            _mapper = mapper;
         }
         public Role GetDefaultRole()
         {
-            return _hostelSystemDbContext.Roles.First();
+            return _hostelSystemDbContext.Roles.FirstOrDefault();
         }
 
     }

@@ -13,6 +13,7 @@ namespace Hostel_System.Database.Entity
         public int Id { get; set; }
         public string RoomName { get; set; }
         public int Phone { get; set; }
+        public int MaxPeopleInRoom { get; set; }
         public List<Reservation> Reservation { get; set; }
     }
 }
