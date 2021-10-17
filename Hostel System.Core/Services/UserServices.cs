@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
+using Hostel_System.Core.Exception;
 using Hostel_System.Core.IServices;
 using Hostel_System.Database;
 using Hostel_System.Database.Entity;
@@ -12,6 +7,7 @@ using Hostel_System.Dto.Dto;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Hostel_System.Core.Services
 {
@@ -37,7 +33,7 @@ namespace Hostel_System.Core.Services
             if (CheckIfUserExist(userDto.Email)) return -1;
             var user = _mapper.Map<User>(userDto);
             user.RoleName = _roleServices.GetDefaultRole();
-            var hashedPassword = _passwordHasher.HashPassword(user,userDto.Password);
+            var hashedPassword = _passwordHasher.HashPassword(user, userDto.Password);
             user.Password = hashedPassword;
             _hostelSystemDbContext.Users.Add(user);
             _hostelSystemDbContext.SaveChanges();
@@ -47,7 +43,7 @@ namespace Hostel_System.Core.Services
         public bool VerifyUser(LoginDto loginDto)
         {
             var user = GetUserByEmail(loginDto.Email);
-            var result =_passwordHasher.VerifyHashedPassword(user, user.Password ,loginDto.Password);
+            var result = _passwordHasher.VerifyHashedPassword(user, user.Password, loginDto.Password);
             if (result == PasswordVerificationResult.Failed) return false;
             return true;
         }
@@ -68,6 +64,7 @@ namespace Hostel_System.Core.Services
         }
         private List<Claim> GetClaims(User user)
         {
+            if (user is null) throw new NotFoundException("User not found.");
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
@@ -79,11 +76,10 @@ namespace Hostel_System.Core.Services
         }
         private User GetUserByEmail(string email)
         {
-            var user = _hostelSystemDbContext
+            return _hostelSystemDbContext
                 .Users
                 .Include(x => x.RoleName)
                 .FirstOrDefault(x => x.Email.Equals(email));
-            return user;
         }
 
         private bool CheckIfUserExist(string email)

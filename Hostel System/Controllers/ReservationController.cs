@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hostel_System.Core.IServices;
+﻿using Hostel_System.Core.IServices;
 using Hostel_System.Dto.Dto;
 using Hostel_System.Mappers;
 using Hostel_System.Model;
@@ -20,7 +15,7 @@ namespace Hostel_System.Controllers
         private readonly IReservationServices _reservationServices;
         private readonly HostelSystemModelMapper _mapper;
 
-        public ReservationController(IRoomServices  roomServices,
+        public ReservationController(IRoomServices roomServices,
             IReservationServices reservationServices,
             HostelSystemModelMapper mapper)
         {
@@ -39,7 +34,7 @@ namespace Hostel_System.Controllers
         [HttpPost]
         public IActionResult Book(RoomReservationModel model)
         {
-            if (!ModelState.IsValid || (model.BookingFrom - model.BookingTo).TotalDays > 0 )
+            if (!ModelState.IsValid || (model.BookingFrom - model.BookingTo).TotalDays > 0)
             {
                 ViewBag.ErrorMessage = "Bad setting date!";
                 return View();

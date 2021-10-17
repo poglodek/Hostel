@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using Hostel_System.Core.IServices;
-using Hostel_System.Dto;
+﻿using Hostel_System.Core.IServices;
 using Hostel_System.Dto.Dto;
 using Hostel_System.Mappers;
 using Hostel_System.Model;
@@ -18,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hostel_System.Controllers
 {
     [Authorize]
-    public class UserController : Controller 
+    public class UserController : Controller
     {
         private readonly IUserServices _userServices;
         private readonly HostelSystemModelMapper _mapper;

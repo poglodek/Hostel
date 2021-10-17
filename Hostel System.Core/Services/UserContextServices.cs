@@ -1,6 +1,6 @@
-﻿using System.Security.Claims;
-using Hostel_System.Core.IServices;
+﻿using Hostel_System.Core.IServices;
 using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace Hostel_System.Core.Services
 {
@@ -29,5 +29,5 @@ namespace Hostel_System.Core.Services
         }
     }
 
-  
+
 }

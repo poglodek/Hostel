@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Hostel_System.Controllers
 {
@@ -13,6 +8,11 @@ namespace Hostel_System.Controllers
         public IActionResult Forbidden()
         {
             return View();
+        }
+        [Route("/NotFound")]
+        public IActionResult NotFound()
+        {
+            return Redirect("Forbidden");
         }
     }
 }

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
+using Hostel_System.Core.Exception;
 using Hostel_System.Core.IServices;
 using Hostel_System.Database;
 using Hostel_System.Database.Entity;
@@ -39,6 +35,7 @@ namespace Hostel_System.Core.Services
             var room = _hostelSystemDbContext
                 .Rooms
                 .FirstOrDefault(x => x.Id == id);
+            if (room is null) throw new NotFoundException("Room not found.");
             return _mapper.Map<RoomDto>(room);
         }
         public Room GetRoom(int id)

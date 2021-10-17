@@ -3,14 +3,10 @@ using Hostel_System.Core.IServices;
 using Hostel_System.Core.Services;
 using Hostel_System.Database;
 using Hostel_System.Database.Entity;
-using Hostel_System.Dto;
 using Hostel_System.Mappers;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +23,7 @@ builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<IRoomServices, RoomServices>();
 builder.Services.AddScoped<IUserContextServices, UserContextServices>();
 builder.Services.AddScoped<IReservationServices, ReservationServices>();
-builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>(); 
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IRoleServices, RoleServices>();
 builder.Services.AddTransient<ErrorHandlingMiddleware>();
 builder.Services.AddTransient<HostelSystemModelMapper>();

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Hostel_System.Core.Exception;
 using Hostel_System.Core.IServices;
 using Hostel_System.Database;
@@ -38,7 +33,7 @@ namespace Hostel_System.Core.Services
         {
             var reservation = MapToReservation(roomReservationDto);
 
-            if (!IsRoomFree(reservation)) 
+            if (!IsRoomFree(reservation))
                 return false;
             _hostelSystemDbContext.Reservations.Add(reservation);
             _hostelSystemDbContext.SaveChanges();
@@ -47,9 +42,9 @@ namespace Hostel_System.Core.Services
 
         public bool IsRoomFree(Reservation reservation)
         {
-           var free =  _hostelSystemDbContext.Reservations
-                .Any(x => x.BookingRoom == reservation.BookingRoom && x.BookingFrom < reservation.BookingFrom &&
-                          x.BookingTo > reservation.BookingTo);
+            var free = _hostelSystemDbContext.Reservations
+                 .Any(x => x.BookingRoom == reservation.BookingRoom && x.BookingFrom < reservation.BookingFrom &&
+                           x.BookingTo > reservation.BookingTo);
             return !free;
         }
 
@@ -61,7 +56,7 @@ namespace Hostel_System.Core.Services
                 .Include(x => x.BookingRoom)
                 .Where(x => x.BookingUser.Id == _userContextServices.GetUserId())
                 .AsEnumerable();
-            return _mapper.Map <IEnumerable<RoomReservedDto>>(reservations);
+            return _mapper.Map<IEnumerable<RoomReservedDto>>(reservations);
         }
 
         public RoomReservedDto GetReservationById(int id)

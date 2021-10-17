@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Hostel_System.Dto.Dto;
 using Hostel_System.Model;
 
 namespace Hostel_System.Mappers
 {
-    public class HostelSystemModelMapper 
+    public class HostelSystemModelMapper
     {
         IMapper _mapper;
         public HostelSystemModelMapper()
@@ -23,7 +18,7 @@ namespace Hostel_System.Mappers
                 config.CreateMap<RoomDto, RoomReservationModel>().ReverseMap();
                 config.CreateMap<RoomReservationDto, RoomReservationModel>().ReverseMap();
                 config.CreateMap<RoomReservedDto, RoomReservedModel>()
-                    .ForMember(x=>x.RoomName, z=>z.MapFrom(c=>c.BookingRoom.RoomName))
+                    .ForMember(x => x.RoomName, z => z.MapFrom(c => c.BookingRoom.RoomName))
                     .ReverseMap();
             }).CreateMapper();
         }

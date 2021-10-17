@@ -25,6 +25,12 @@ namespace Hostel_System
                 context.Response.StatusCode = 403;
                 await context.Response.WriteAsync("Forbidden!");
             }
+            catch (NotFoundException ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                context.Response.StatusCode = 403;
+                await context.Response.WriteAsync("Not found!!");
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message, ex);

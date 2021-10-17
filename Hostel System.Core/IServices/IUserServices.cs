@@ -1,6 +1,6 @@
-﻿using System.Security.Claims;
-using Hostel_System.Database.Entity;
+﻿using Hostel_System.Database.Entity;
 using Hostel_System.Dto.Dto;
+using System.Security.Claims;
 
 namespace Hostel_System.Core.IServices;
 

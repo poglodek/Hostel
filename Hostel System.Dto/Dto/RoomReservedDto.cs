@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hostel_System.Database.Entity;
+﻿using Hostel_System.Database.Entity;
 
 namespace Hostel_System.Dto.Dto
 {
