@@ -42,10 +42,9 @@ namespace Hostel_System.Core.Services
 
         public bool IsRoomFree(Reservation reservation)
         {
-            var free = _hostelSystemDbContext.Reservations
+           return ! _hostelSystemDbContext.Reservations
                  .Any(x => x.BookingRoom == reservation.BookingRoom && x.BookingFrom < reservation.BookingFrom &&
                            x.BookingTo > reservation.BookingTo);
-            return !free;
         }
 
         public IEnumerable<RoomReservedDto> GetMyReservations()

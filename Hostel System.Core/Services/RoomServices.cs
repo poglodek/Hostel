@@ -26,8 +26,7 @@ namespace Hostel_System.Core.Services
                 .Skip(page * 10)
                 .Take(10)
                 .AsEnumerable();
-            var roomsDto = _mapper.Map<IEnumerable<RoomDto>>(rooms);
-            return roomsDto;
+            return _mapper.Map<IEnumerable<RoomDto>>(rooms);
         }
 
         public RoomDto GetRoomDto(int id)
