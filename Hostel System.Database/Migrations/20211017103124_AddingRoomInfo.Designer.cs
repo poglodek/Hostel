@@ -4,14 +4,16 @@ using Hostel_System.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Hostel_System.Database.Migrations
 {
     [DbContext(typeof(HostelSystemDbContext))]
-    partial class HostelSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211017103124_AddingRoomInfo")]
+    partial class AddingRoomInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -25,6 +25,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Reservation" asp-action="Home">Reservation</a>
                         </li>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Reservation" asp-action="Home">Manger</a>
+                            </li>
+                        }
+                        @if(User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Reservation" asp-action="Home">Admin</a>
+                            </li>
+                        }
                     </ul>
                 @if (User.Identity.IsAuthenticated)
                 {

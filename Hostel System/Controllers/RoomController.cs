@@ -9,11 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hostel_System.Controllers
 {
     [Authorize(Roles = "Admin,Manager")]
-    public class ReservationController : Controller
+    public class RoomController : Controller
     {
-        public IActionResult Home()
-        {
-            return View();
-        }
+        
     }
 }

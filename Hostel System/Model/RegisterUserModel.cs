@@ -24,7 +24,6 @@ namespace Hostel_System.Model
         public int Phone { get; set; }
         [Required]
         public string Address { get; set; }
-        [Required]
         public string? CarRegistrationNumber { get; set; }
     }
 }

@@ -67,7 +67,12 @@ namespace Hostel_System.Controllers
                 return View();
             }
             var registerUserDto = _mapper.MapToDto(registerUserModel);
-            _userServices.RegisterUser(registerUserDto);
+            var userId = _userServices.RegisterUser(registerUserDto);
+            if (userId == -1)
+            {
+                ViewBag.ErrorMessage = "User Exist! Please Login in!";
+                return View();
+            }
             return RedirectToAction("Index");
         }
         [AllowAnonymous]

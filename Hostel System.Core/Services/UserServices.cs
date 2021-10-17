@@ -34,6 +34,7 @@ namespace Hostel_System.Core.Services
         }
         public int RegisterUser(RegisterUserDto userDto)
         {
+            if (CheckIfUserExist(userDto.Email)) return -1;
             var user = _mapper.Map<User>(userDto);
             user.RoleName = _roleServices.GetDefaultRole();
             var hashedPassword = _passwordHasher.HashPassword(user,userDto.Password);
@@ -75,8 +76,12 @@ namespace Hostel_System.Core.Services
                 .Users
                 .Include(x => x.RoleName)
                 .FirstOrDefault(x => x.Email.Equals(email));
-            if (user is null) throw new Exception("User not Found");
             return user;
+        }
+
+        private bool CheckIfUserExist(string email)
+        {
+            return _hostelSystemDbContext.Users.Any(x => x.Email.Equals(email));
         }
     }
 }
