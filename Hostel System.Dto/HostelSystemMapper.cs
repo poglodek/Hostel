@@ -11,6 +11,8 @@ namespace Hostel_System.Dto
         {
             CreateMap<RegisterUserDto, User>().ReverseMap();
             CreateMap<LoginDto, User>().ReverseMap();
+            CreateMap<Room, RoomDto>().ReverseMap();
+            CreateMap<Room, RoomDto>().ReverseMap();
         }
     }
 }

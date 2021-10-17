@@ -3,14 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hostel_System.Core.IServices;
+using Hostel_System.Mappers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hostel_System.Controllers
 {
-    [Authorize(Roles = "Admin,Manager")]
+    [Route("Room")]
+    [Authorize]
     public class RoomController : Controller
     {
-        
+        private readonly IRoomServices _roomServices;
+        private readonly HostelSystemModelMapper _mapper;
+
+        public RoomController(IRoomServices roomServices,
+            HostelSystemModelMapper mapper)
+        {
+            _roomServices = roomServices;
+            _mapper = mapper;
+        }
+        [Route("page/{page}")]
+        public IActionResult Index(int page)
+        {
+            var rooms = _roomServices.GetRooms(page);
+            ViewBag.Page = page;
+            return View(_mapper.MapToModel(rooms));
+        }
+        [Route("Details/{id}")]
+        public IActionResult Details(int id)
+        {
+            var room = _roomServices.GetRoom(id);
+            return View(_mapper.MapToModel(room));
+        }
     }
 }

@@ -23,6 +23,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 });
 builder.Services.AddAutoMapper(typeof(Hostel_System.Dto.HostelSystemMapper).Assembly);
 builder.Services.AddScoped<IUserServices, UserServices>();
+builder.Services.AddScoped<IRoomServices, RoomServices>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>(); 
 builder.Services.AddScoped<IRoleServices, RoleServices>();
 builder.Services.AddTransient<HostelSystemModelMapper>();

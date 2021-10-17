@@ -1,0 +1,19 @@
+﻿@model Hostel_System.Model.RoomModel
+
+@{
+    ViewBag.Title = "Room " + @Html.DisplayFor(model => model.RoomName) ;
+    Layout = "_Layout";
+}
+
+<h2>Room:  @Html.DisplayFor(model => model.RoomName)</h2>
+<a class="btn btn-success" asp-controller="Reservation" asp-action="Book" asp-route-id="@Model.Id">Book Here!</a>
+<div>Description: <br />
+    @Html.DisplayFor(model => model.Description)
+    
+    <br /><br />
+    Max people: @Html.DisplayFor(model => model.MaxPeopleInRoom) <br />
+    Price: @Html.DisplayFor(model => model.PriceForDay)$/Day <br />
+    
+</div>
+
+

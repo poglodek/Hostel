@@ -18,6 +18,8 @@ namespace Hostel_System.Mappers
             {
                 config.CreateMap<RegisterUserModel, RegisterUserDto>().ReverseMap();
                 config.CreateMap<LoginModel, LoginDto>().ReverseMap();
+                config.CreateMap<RoomModel, RoomDto>().ReverseMap();
+                config.CreateMap<RoomModel, RoomReservationModel>().ReverseMap();
             }).CreateMapper();
         }
 
@@ -28,7 +30,19 @@ namespace Hostel_System.Mappers
         public LoginModel MapToModel(LoginDto login) =>
             _mapper.Map<LoginModel>(login);
         public LoginDto MapToDto(LoginModel login) =>
-            _mapper.Map<LoginDto>(login);
+            _mapper.Map<LoginDto>(login); 
+        public RoomModel MapToModel(RoomDto login) =>
+            _mapper.Map<RoomModel>(login);
+        public RoomDto MapToDto(RoomModel login) =>
+            _mapper.Map<RoomDto>(login);
+        public RoomReservationModel MapToModel(RoomModel login) =>
+            _mapper.Map<RoomReservationModel>(login);
+        public RoomDto MapToModel(RoomReservationModel login) =>
+            _mapper.Map<RoomDto>(login);
+        public IEnumerable<RoomModel> MapToModel(IEnumerable<RoomDto> login) =>
+            _mapper.Map<IEnumerable<RoomModel>>(login);
+        public IEnumerable<RoomDto> MapToDto(IEnumerable<RoomModel> login) =>
+            _mapper.Map<IEnumerable<RoomDto>>(login);
 
     }
 }

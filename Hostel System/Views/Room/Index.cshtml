@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Hostel_System.Model.RoomModel>
+
+@{
+    ViewBag.Title = "Rooms";
+    Layout = "_Layout";
+}
+
+<h2>Rooms</h2><br /> Page: @ViewBag.Page
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                Room Name
+            </th>
+            <th>
+                Room For 
+            </th>
+            <th>
+                Price for day
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody style="font-size:larger;">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(x=> item.RoomName)
+                </td>
+                <td>
+                    @Html.DisplayFor(x=> item.MaxPeopleInRoom)
+                </td>
+                <td>
+                    @Html.DisplayFor(x=> item.PriceForDay)
+                </td>
+                <td>
+                    <a class="btn btn-success" asp-controller="Room" asp-action="Details" asp-route-id="@item.Id">Book!</a>
+                </td>
+            </tr>
+            
+        }
+        </tbody>
+    </table>
+</div>
+@{
+    var page = (int) ViewBag.Page;
+    var pageUp = ++page;
+    var pageDown = --page;
+
+}
+@if(ViewBag.Page != 0)
+{
+    <a class="btn btn-success" asp-controller="Room" asp-action="Index" asp-route-page="@pageDown" asp>Back!</a>
+}
+
+<a class="btn btn-success" asp-controller="Room" asp-action="Index" asp-route-page="@pageUp">Next Page!</a>
