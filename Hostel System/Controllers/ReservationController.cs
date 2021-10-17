@@ -58,8 +58,14 @@ namespace Hostel_System.Controllers
         [Route("history")]
         public IActionResult History()
         {
-            var reservation = _reservationServices.GetMyReservation();
-            return View(_mapper.Map<IEnumerable<RoomReservedModel>>(reservation));
+            var reservations = _reservationServices.GetMyReservations();
+            return View(_mapper.Map<IEnumerable<RoomReservedModel>>(reservations));
+        }
+        [HttpGet("DetailsReserved/{id}")]
+        public IActionResult DetailsReserved(int id)
+        {
+            var reservation = _reservationServices.GetReservationById(id);
+            return View(_mapper.Map<RoomReservedModel>(reservation));
         }
     }
 }

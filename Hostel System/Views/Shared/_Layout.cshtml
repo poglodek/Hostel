@@ -38,7 +38,7 @@
                     </ul>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <a class="nav-link text-dark" asp-area="" >@User.Claims.First(x => x.Type == ClaimTypes.Name).Value</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Me" >@User.Claims.First(x => x.Type == ClaimTypes.Name).Value</a>
                     <a class="btn btn-outline-danger" asp-area="" asp-controller="User" asp-action="SingOut">Sing out</a>
                 }
                 else

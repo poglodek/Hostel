@@ -1,3 +1,4 @@
+using Hostel_System;
 using Hostel_System.Core.IServices;
 using Hostel_System.Core.Services;
 using Hostel_System.Database;
@@ -28,8 +29,10 @@ builder.Services.AddScoped<IUserContextServices, UserContextServices>();
 builder.Services.AddScoped<IReservationServices, ReservationServices>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>(); 
 builder.Services.AddScoped<IRoleServices, RoleServices>();
+builder.Services.AddTransient<ErrorHandlingMiddleware>();
 builder.Services.AddTransient<HostelSystemModelMapper>();
 builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -43,7 +46,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseMiddleware<ErrorHandlingMiddleware>();
 var scope = app.Services.CreateScope();
 scope.ServiceProvider.GetService<HostelSystemDbContext>().Database.Migrate();
 

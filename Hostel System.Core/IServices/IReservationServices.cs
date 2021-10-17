@@ -7,5 +7,6 @@ public interface IReservationServices
 {
     bool Book(RoomReservationDto roomReservationDto);
     bool IsRoomFree(Reservation reservation);
-    IEnumerable<RoomReservedDto> GetMyReservation();
+    IEnumerable<RoomReservedDto> GetMyReservations();
+    RoomReservedDto GetReservationById(int id);
 }

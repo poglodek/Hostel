@@ -1,0 +1,14 @@
+﻿@model Hostel_System.Model.RoomReservedModel
+
+@{
+    ViewBag.Title = "Reservation";
+    Layout = "_Layout";
+}
+
+<h2>Reservation From @Html.DisplayFor(x=>x.BookingFrom) to : @Html.DisplayFor(x=>x.BookingTo)</h2> <br />
+    <p>Room name:@Html.DisplayFor(x=>x.RoomName) </p>
+    <p>Additional Information:@Html.DisplayFor(x=>x.AdditionalInformation) </p>
+    <p>Status:@Html.DisplayFor(x=>x.Status) </p>
+<p>TotalCost:@Html.DisplayFor(x=>x.TotalCost)$</p>
+<br />
+<a class="btn btn-outline-info" href="mailto:info@Hostel_System.com">Contact with us!</a>

@@ -81,5 +81,10 @@ namespace Hostel_System.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult Me()
+        {
+            return View();
+        }
     }
 }
