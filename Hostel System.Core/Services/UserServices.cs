@@ -52,6 +52,13 @@ namespace Hostel_System.Core.Services
             return true;
         }
 
+        public User GetUserById(int id)
+        {
+            return _hostelSystemDbContext
+                .Users
+                .FirstOrDefault(x => x.Id == id);
+        }
+
         public ClaimsPrincipal GetClaimsPrincipal(LoginDto loginDto)
         {
             var user = GetUserByEmail(loginDto.Email);

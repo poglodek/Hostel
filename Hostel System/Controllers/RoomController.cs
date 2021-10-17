@@ -28,13 +28,13 @@ namespace Hostel_System.Controllers
         {
             var rooms = _roomServices.GetRooms(page);
             ViewBag.Page = page;
-            return View(_mapper.MapToModel(rooms));
+            return View(_mapper.Map<IEnumerable<Hostel_System.Model.RoomModel>>(rooms));
         }
         [Route("Details/{id}")]
         public IActionResult Details(int id)
         {
-            var room = _roomServices.GetRoom(id);
-            return View(_mapper.MapToModel(room));
+            var room = _roomServices.GetRoomDto(id);
+            return View(_mapper.Map<Hostel_System.Model.RoomModel>(room));
         }
     }
 }

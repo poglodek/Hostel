@@ -1,8 +1,46 @@
-﻿@model dynamic
+﻿@model Hostel_System.Model.RoomReservationModel
 
 @{
     ViewBag.Title = "Book Room!";
     Layout = "_Layout";
+    var price = Model.PriceForDay;
 }
 
-<h2>Booking Room</h2>
+@{
+    if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+       
+}
+<form asp-controller="Reservation" asp-action="Book"> 
+    <h2>Booking Room: @Html.DisplayFor(x=> Model.Id)</h2>
+    <br /> Remember, day started at 2pm and end with 11 am.
+    <br /> 
+    @Html.HiddenFor(x=> x.PriceForDay)
+    <p>Price for day: @price $</p>
+    <label for="exampleInputEmail1">Book from:</label>
+    @Html.EditorFor(model => model.BookingFrom, 
+        new { htmlAttributes = new { @class = "form-control date-picker" } })<br />
+    <label for="exampleInputEmail1">Book To:</label>
+    @Html.EditorFor(model => model.BookingTo, 
+        new { htmlAttributes = new { @class = "form-control date-picker" } })<br />
+    <input asp-for="AdditionalInformation" type="text" class="form-control"  placeholder="Additional Information">
+    <button type="submit" class="btn btn-info">Book!</button>
+</form>
+
+@section scripts{
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $(".date-picker").datepicker({
+                dateFormat: 'dd-M-yy'
+            });
+
+        });
+
+    </script>
+}

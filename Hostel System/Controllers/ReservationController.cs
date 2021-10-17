@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hostel_System.Core.IServices;
+using Hostel_System.Dto.Dto;
+using Hostel_System.Mappers;
 using Hostel_System.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,19 +15,44 @@ namespace Hostel_System.Controllers
     [Authorize]
     public class ReservationController : Controller
     {
-        public ReservationController()
+        private readonly IRoomServices _roomServices;
+        private readonly IReservationServices _reservationServices;
+        private readonly HostelSystemModelMapper _mapper;
+
+        public ReservationController(IRoomServices  roomServices,
+            IReservationServices reservationServices,
+            HostelSystemModelMapper mapper)
         {
-            
+            _roomServices = roomServices;
+            _reservationServices = reservationServices;
+            _mapper = mapper;
         }
         [HttpGet]
         public IActionResult Book(int id)
         {
-            return View();
+            var room = _roomServices.GetRoomDto(id);
+            var model = _mapper.Map<RoomReservationModel>(room);
+            model.PriceForDay = room.PriceForDay;
+            return View(model);
         }
         [HttpPost]
         public IActionResult Book(RoomReservationModel model)
         {
-            return View();
+            if (!ModelState.IsValid || (model.BookingFrom - model.BookingTo).TotalDays > 0 )
+            {
+                ViewBag.ErrorMessage = "Bad setting date!";
+                return View();
+            }
+
+            var dto = _mapper.Map<RoomReservationDto>(model);
+            dto.PriceForDay = model.PriceForDay;
+            var result = _reservationServices.Book(dto);
+            if (result == false)
+            {
+                ViewBag.ErrorMessage = "This Date is busy";
+                return View();
+            }
+            return Ok("TODO, room booked!");
         }
     }
 }

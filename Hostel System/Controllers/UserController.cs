@@ -39,7 +39,7 @@ namespace Hostel_System.Controllers
         [HttpPost("/Login")]
         public async Task<IActionResult> Index(LoginModel loginModel)
         {
-            var user = _mapper.MapToDto(loginModel);
+            var user = _mapper.Map<LoginDto>(loginModel);
             if (!ModelState.IsValid || !_userServices.VerifyUser(user))
             {
                 ViewBag.ErrorMessage = "Email or Password is wrong!";
@@ -66,7 +66,7 @@ namespace Hostel_System.Controllers
                 ViewBag.ErrorMessage = "All fields required!";
                 return View();
             }
-            var registerUserDto = _mapper.MapToDto(registerUserModel);
+            var registerUserDto = _mapper.Map<RegisterUserDto>(registerUserModel);
             var userId = _userServices.RegisterUser(registerUserDto);
             if (userId == -1)
             {

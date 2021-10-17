@@ -24,9 +24,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddAutoMapper(typeof(Hostel_System.Dto.HostelSystemMapper).Assembly);
 builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<IRoomServices, RoomServices>();
+builder.Services.AddScoped<IUserContextServices, UserContextServices>();
+builder.Services.AddScoped<IReservationServices, ReservationServices>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>(); 
 builder.Services.AddScoped<IRoleServices, RoleServices>();
 builder.Services.AddTransient<HostelSystemModelMapper>();
+builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

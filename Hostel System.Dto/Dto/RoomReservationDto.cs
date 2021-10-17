@@ -14,6 +14,5 @@ namespace Hostel_System.Dto.Dto
 
         public double PriceForDay { get; set; }
         public string AdditionalInformation { get; set; }
-        public double TotalCost { get; set; }
     }
 }

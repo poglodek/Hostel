@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Hostel_System.Core.IServices;
 using Hostel_System.Database;
+using Hostel_System.Database.Entity;
 using Hostel_System.Dto.Dto;
 
 namespace Hostel_System.Core.Services
@@ -33,12 +34,18 @@ namespace Hostel_System.Core.Services
             return roomsDto;
         }
 
-        public RoomDto GetRoom(int id)
+        public RoomDto GetRoomDto(int id)
         {
             var room = _hostelSystemDbContext
                 .Rooms
                 .FirstOrDefault(x => x.Id == id);
             return _mapper.Map<RoomDto>(room);
+        }
+        public Room GetRoom(int id)
+        {
+            return _hostelSystemDbContext
+                .Rooms
+                .FirstOrDefault(x => x.Id == id);
         }
     }
 }

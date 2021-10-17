@@ -6,7 +6,7 @@
 }
 
 <h2>Room:  @Html.DisplayFor(model => model.RoomName)</h2>
-<a class="btn btn-success" asp-controller="Reservation" asp-action="Book" asp-route-id="@Model.Id">Book Here!</a>
+
 <div>Description: <br />
     @Html.DisplayFor(model => model.Description)
     
@@ -15,5 +15,5 @@
     Price: @Html.DisplayFor(model => model.PriceForDay)$/Day <br />
     
 </div>
-
+<a class="btn btn-success" asp-controller="Reservation" asp-action="Book" asp-route-id="@Model.Id">Book Here!</a>
 
