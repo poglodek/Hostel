@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hostel_System.Controllers
 {
     [Authorize]
+    [Route("Reservation")]
     public class ReservationController : Controller
     {
         private readonly IRoomServices _roomServices;
@@ -53,6 +54,12 @@ namespace Hostel_System.Controllers
                 return View();
             }
             return Ok("TODO, room booked!");
+        }
+        [Route("history")]
+        public IActionResult History()
+        {
+            var reservation = _reservationServices.GetMyReservation();
+            return View(_mapper.Map<IEnumerable<RoomReservedModel>>(reservation));
         }
     }
 }

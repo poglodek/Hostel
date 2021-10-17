@@ -8,6 +8,7 @@ using Hostel_System.Core.IServices;
 using Hostel_System.Database;
 using Hostel_System.Database.Entity;
 using Hostel_System.Dto.Dto;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hostel_System.Core.Services
 {
@@ -62,5 +63,15 @@ namespace Hostel_System.Core.Services
             return !free;
         }
 
+        public IEnumerable<RoomReservedDto> GetMyReservation()
+        {
+            var reservation = _hostelSystemDbContext
+                .Reservations
+                .Include(x => x.BookingUser)
+                .Include(x => x.BookingRoom)
+                .Where(x => x.BookingUser.Id == _userContextServices.GetUserId())
+                .AsEnumerable();
+            return _mapper.Map <IEnumerable<RoomReservedDto>>(reservation);
+        }
     }
 }

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Hostel_System.Model.RoomReservedModel> 
+
+@{
+    ViewBag.Title = "Your Reservation";
+    Layout = "_Layout";
+}
+
+<h2>Your Reservation:</h2>
+<div class="table-responsive">
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Room Name
+        </th>
+        <th>
+            Booking From 
+        </th>
+        <th>
+            Booking to
+        </th>
+        <th>
+            Total Cost
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody style="font-size:larger;">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(x=> item.RoomName)
+            </td>
+            <td>
+                @Html.DisplayFor(x=> item.BookingFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(x=> item.BookingTo)
+            </td>
+            <td>
+                @Html.DisplayFor(x=> item.TotalCost)
+            </td>
+            <td>
+                <a class="btn btn-outline-success" asp-controller="Reservation" asp-action="Details" asp-route-id="@item.Id">Details!</a>
+            </td>
+        </tr>
+            
+    }
+    </tbody>
+</table>
+</div>
