@@ -22,6 +22,9 @@
         <th>
             Total Cost
         </th>
+        <th>
+            Status
+        </th>
         <th></th>
     </tr>
     </thead>
@@ -40,6 +43,9 @@
             </td>
             <td>
                 @Html.DisplayFor(x=> item.TotalCost)
+            </td>
+            <td>
+                @Html.DisplayFor(x=> item.Status)
             </td>
             <td>
                 <a class="btn btn-outline-success" asp-controller="Reservation" asp-action="DetailsReserved" asp-route-id="@item.Id">Details!</a>

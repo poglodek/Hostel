@@ -1,0 +1,97 @@
+﻿@model Hostel_System.Model.SearchingParse
+@{
+    ViewBag.Title = "Manager Tools";
+    Layout = "_Layout";
+}
+
+<h2>Manager Tools</h2>
+<form>
+    <p>Enter searching parse here:</p>
+    <input asp-for="SearchParse" type="text" class="form-control" id="searchingPars" aria-describedby="search" placeholder="Search Parse!">
+    <table class="table">
+        <thead>
+        <tr>
+            <th style="color: #009929;">
+                Reservation 
+            </th>
+            <th style="color: #004a99;">
+                Rooms
+            </th>
+            <th style="color: #006fe6;">
+                Users
+            </th>
+        </tr>
+        </thead>
+        <tbody style="font-size:larger;">
+
+        <tr>
+            <td>
+                <button type="submit"  class="btn btn-outline-success" asp-controller="Manager" asp-action="Test" >All Reservations</button>
+            </td>
+            <td>
+                <button type="submit"  class="btn btn-outline-info" asp-controller="Reservation" asp-action="DetailsReserved" > All Rooms</button>
+            </td>
+            <td>
+                <button type="submit"  class="btn btn-outline-primary" asp-controller="Reservation" asp-action="DetailsReserved" >All Users!</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit"  class="btn btn-outline-success" asp-controller="Reservation" asp-action="DetailsReserved" >Reservation for room</button>
+            </td>
+            <td>
+                <button type="submit"  class="btn btn-outline-info" asp-controller="Reservation" asp-action="DetailsReserved" > Room by room name</button>
+            </td>
+            <td>
+                <button type="submit"  class="btn btn-outline-primary" asp-controller="Reservation" asp-action="DetailsReserved" >User by Name</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit"  class="btn btn-outline-success" asp-controller="Reservation" asp-action="DetailsReserved" >Reservation for Date</button>
+            </td>
+            <td>
+                <button type="submit"  class="btn btn-outline-info" asp-controller="Reservation" asp-action="DetailsReserved" > Room by Phone</button>
+            </td>
+            <td>
+                <button type="submit"  class="btn btn-outline-primary" asp-controller="Reservation" asp-action="DetailsReserved" >User by Phone</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit"  class="btn btn-outline-success" asp-controller="Reservation" asp-action="DetailsReserved" >Reservation for UserId</button>
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                <button type="submit"  class="btn btn-outline-primary" asp-controller="Reservation" asp-action="DetailsReserved" >User by Id</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit"  class="btn btn-outline-success" asp-controller="Reservation" asp-action="DetailsReserved" >Reservation for User Email</button>
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" class="btn btn-outline-success" asp-controller="Reservation" asp-action="DetailsReserved" >Reservation for User Name</button>
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+                
+        
+        </tbody>
+    </table>
+</form>

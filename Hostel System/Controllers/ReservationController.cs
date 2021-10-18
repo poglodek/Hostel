@@ -62,5 +62,6 @@ namespace Hostel_System.Controllers
             var reservation = _reservationServices.GetReservationById(id);
             return View(_mapper.Map<RoomReservedModel>(reservation));
         }
+        
     }
 }
