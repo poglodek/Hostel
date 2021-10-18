@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Hostel_System.Controllers
 {
@@ -32,7 +33,7 @@ namespace Hostel_System.Controllers
         public async Task<IActionResult> Index(LoginModel loginModel)
         {
             var user = _mapper.Map<LoginDto>(loginModel);
-            if (!ModelState.IsValid || !_userServices.VerifyUser(user))
+            if (!ModelState.IsValid || user is null || !_userServices.VerifyUser(user))
             {
                 ViewBag.ErrorMessage = "Email or Password is wrong!";
                 return View();
@@ -77,6 +78,45 @@ namespace Hostel_System.Controllers
         public IActionResult Me()
         {
             return View();
+        }
+        [HttpGet("AllUsers")]
+        [Authorize(Roles = "Admin,Manager")]
+        public IActionResult AllUsers([FromQuery] string SearchParse)
+        {
+            var users = _userServices.GetAllUsers();
+            TempData["Users"] = JsonConvert.SerializeObject(users);
+            return RedirectToAction("UsersList", "User");
+        }
+        [HttpGet("GetUserByName")]
+        [Authorize(Roles = "Admin,Manager")]
+        public IActionResult GetUserByName([FromQuery] string SearchParse)
+        {
+            var users = _userServices.GetUsersByName(SearchParse);
+            TempData["Users"] = JsonConvert.SerializeObject(users);
+            return RedirectToAction("UsersList", "User");
+        }
+        [HttpGet("UsersList")]
+        [Authorize(Roles = "Admin,Manager")]
+        public IActionResult UsersList()
+        {
+            var model = JsonConvert.DeserializeObject<IEnumerable<UserModel>>(TempData["Users"] as string);
+            return View(model);
+        }
+        [HttpGet("GetUserByPhone")]
+        [Authorize(Roles = "Admin,Manager")]
+        public IActionResult GetUserByPhone([FromQuery] string SearchParse)
+        {
+            var users = _userServices.GetUsersByPhone(SearchParse);
+            TempData["Users"] = JsonConvert.SerializeObject(users);
+            return RedirectToAction("UsersList", "User");
+        }
+        [HttpGet("GetUserByEmail")]
+        [Authorize(Roles = "Admin,Manager")]
+        public IActionResult GetUserByEmail([FromQuery] string SearchParse)
+        {
+            var users = _userServices.GetUsersByEmail(SearchParse);
+            TempData["Users"] = JsonConvert.SerializeObject(users);
+            return RedirectToAction("UsersList", "User");
         }
     }
 }

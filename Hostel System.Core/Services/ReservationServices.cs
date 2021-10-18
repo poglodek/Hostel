@@ -70,6 +70,26 @@ namespace Hostel_System.Core.Services
             return _mapper.Map<RoomReservedDto>(reservation);
         }
 
+        public RoomReservedDto GetActualReservationByRoomId(int id)
+        {
+            return _mapper.Map<RoomReservedDto>(_hostelSystemDbContext
+                .Reservations
+                .Include(x => x.BookingRoom)
+                .Include(x => x.BookingUser)
+                .FirstOrDefault(x => x.BookingRoom.Id == id && x.BookingFrom < DateTime.Now && x.BookingTo > DateTime.Now));
+        }
+        public int GetActualReservationIdByRoomId(int id)
+        {
+            var reservation = _hostelSystemDbContext
+                .Reservations
+                .Include(x => x.BookingRoom)
+                .Include(x => x.BookingUser)
+                .FirstOrDefault(x =>
+                    x.BookingRoom.Id == id && x.BookingFrom < DateTime.Now && x.BookingTo > DateTime.Now);
+            if (reservation is null) return -1;
+            return reservation.Id;
+        }
+
         private Reservation MapToReservation(RoomReservationDto roomReservationDto)
         {
             var dateFrom = DateTime.Parse(roomReservationDto.BookingFrom.ToShortDateString()).AddHours(11);

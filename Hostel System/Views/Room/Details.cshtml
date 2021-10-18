@@ -16,4 +16,8 @@
     
 </div>
 <a class="btn btn-success" asp-controller="Reservation" asp-action="Book" asp-route-id="@Model.Id">Book Here!</a>
-
+<br />
+@if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+{
+    <a class="nav-link text-dark" asp-area="" asp-controller="Reservation" asp-action="ActualReservedByRoom" asp-route-id="@Model.Id"> <h3>Actual Reserved</h3></a>
+}

@@ -10,4 +10,8 @@ public interface IUserServices
     bool VerifyUser(LoginDto loginDto);
     User GetUserById(int id);
     ClaimsPrincipal GetClaimsPrincipal(LoginDto loginDto);
+    IEnumerable<UserDto> GetAllUsers();
+    IEnumerable<UserDto> GetUsersByName(string searchParse);
+    IEnumerable<UserDto> GetUsersByPhone(string searchParse);
+    IEnumerable<UserDto> GetUsersByEmail(string searchParse);
 }

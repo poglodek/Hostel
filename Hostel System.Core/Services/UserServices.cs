@@ -43,6 +43,7 @@ namespace Hostel_System.Core.Services
         public bool VerifyUser(LoginDto loginDto)
         {
             var user = GetUserByEmail(loginDto.Email);
+            if (user is null) return false;
             var result = _passwordHasher.VerifyHashedPassword(user, user.Password, loginDto.Password);
             if (result == PasswordVerificationResult.Failed) return false;
             return true;
@@ -62,6 +63,38 @@ namespace Hostel_System.Core.Services
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             return new ClaimsPrincipal(claimsIdentity);
         }
+
+        public IEnumerable<UserDto> GetAllUsers()
+        {
+            return _mapper.Map<IEnumerable<UserDto>>(_hostelSystemDbContext
+                .Users
+                .AsQueryable());
+        }
+
+        public IEnumerable<UserDto> GetUsersByName(string searchParse)
+        {
+            return _mapper.Map<IEnumerable<UserDto>>(_hostelSystemDbContext
+                .Users
+                .Where(x=> (x.FirstName + " " + x.LastName).Contains(searchParse))
+                .AsQueryable());
+        }
+
+        public IEnumerable<UserDto> GetUsersByPhone(string searchParse)
+        {
+            return _mapper.Map<IEnumerable<UserDto>>(_hostelSystemDbContext
+                .Users
+                .Where(x => x.Phone.ToString().Contains(searchParse))
+                .AsQueryable());
+        }
+
+        public IEnumerable<UserDto> GetUsersByEmail(string searchParse)
+        {
+            return _mapper.Map<IEnumerable<UserDto>>(_hostelSystemDbContext
+                .Users
+                .Where(x => x.Email.Contains(searchParse))
+                .AsQueryable());
+        }
+
         private List<Claim> GetClaims(User user)
         {
             if (user is null) throw new NotFoundException("User not found.");

@@ -1,0 +1,47 @@
+﻿@model System.Collections.Generic.IEnumerable<Hostel_System.Model.UserModel>
+
+@{
+    ViewBag.Title = "All Users";
+    Layout = "_Layout";
+}
+
+<h2>Users</h2>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Phone
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody style="font-size:larger;">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(x=> item.FirstName)
+                    @Html.DisplayFor(x=> item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(x=> item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(x=> item.Phone)
+                </td>
+                <td>
+                    <a class="btn btn-outline-success" asp-controller="Room" asp-action="Details" asp-route-id="@item.Id">Details!</a>
+                </td>
+            </tr>
+            
+        }
+        </tbody>
+    </table>
+</div>

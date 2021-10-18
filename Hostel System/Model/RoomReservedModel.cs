@@ -8,6 +8,7 @@
         public string RoomName { get; set; }
         public string? AdditionalInformation { get; set; }
         public double TotalCost { get; set; }
+        public UserModel BookingUser { get; set; }
         public string Status { get; set; } //booked, actual, completed, canceled
     }
 }

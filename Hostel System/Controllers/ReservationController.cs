@@ -62,6 +62,19 @@ namespace Hostel_System.Controllers
             var reservation = _reservationServices.GetReservationById(id);
             return View(_mapper.Map<RoomReservedModel>(reservation));
         }
-        
+
+        [HttpGet("ActualReservedByRoom")]
+        [Authorize(Roles = "Admin,Manager")]
+        public IActionResult ActualReservedByRoom(int id)
+        {
+            var reservationId = _reservationServices.GetActualReservationIdByRoomId(id);
+            if (reservationId == -1)
+            {
+                return RedirectToAction("Details", "Room", new { id });
+            }
+            return RedirectToAction("DetailsReserved", "Reservation", new { id = reservationId });
+        }
+
+
     }
 }

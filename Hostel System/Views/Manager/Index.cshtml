@@ -29,10 +29,10 @@
                 <button type="submit"  class="btn btn-outline-success" asp-controller="Manager" asp-action="Test" >All Reservations</button>
             </td>
             <td>
-                <button type="submit"  class="btn btn-outline-info" asp-controller="Reservation" asp-action="DetailsReserved" > All Rooms</button>
+                <button type="submit"  class="btn btn-outline-info" asp-controller="Room" asp-action="Index" asp-route-page="0" > All Rooms</button>
             </td>
             <td>
-                <button type="submit"  class="btn btn-outline-primary" asp-controller="Reservation" asp-action="DetailsReserved" >All Users!</button>
+                <button type="submit"  class="btn btn-outline-primary" asp-controller="User" asp-action="AllUsers" >All Users!</button>
             </td>
         </tr>
         <tr>
@@ -40,10 +40,10 @@
                 <button type="submit"  class="btn btn-outline-success" asp-controller="Reservation" asp-action="DetailsReserved" >Reservation for room</button>
             </td>
             <td>
-                <button type="submit"  class="btn btn-outline-info" asp-controller="Reservation" asp-action="DetailsReserved" > Room by room name</button>
+                <button type="submit"  class="btn btn-outline-info" asp-controller="Room" asp-action="RoomName" > Room by room name</button>
             </td>
             <td>
-                <button type="submit"  class="btn btn-outline-primary" asp-controller="Reservation" asp-action="DetailsReserved" >User by Name</button>
+                <button type="submit"  class="btn btn-outline-primary" asp-controller="User" asp-action="GetUserByName" >User by Name</button>
             </td>
         </tr>
         <tr>
@@ -51,10 +51,10 @@
                 <button type="submit"  class="btn btn-outline-success" asp-controller="Reservation" asp-action="DetailsReserved" >Reservation for Date</button>
             </td>
             <td>
-                <button type="submit"  class="btn btn-outline-info" asp-controller="Reservation" asp-action="DetailsReserved" > Room by Phone</button>
+                
             </td>
             <td>
-                <button type="submit"  class="btn btn-outline-primary" asp-controller="Reservation" asp-action="DetailsReserved" >User by Phone</button>
+                <button type="submit"  class="btn btn-outline-primary" asp-controller="User" asp-action="GetUserByPhone" >User by Phone</button>
             </td>
         </tr>
         <tr>
@@ -65,12 +65,12 @@
                 
             </td>
             <td>
-                <button type="submit"  class="btn btn-outline-primary" asp-controller="Reservation" asp-action="DetailsReserved" >User by Id</button>
+                <button type="submit"  class="btn btn-outline-primary" asp-controller="User" asp-action="GetUserByEmail" >User by Email</button>
             </td>
         </tr>
         <tr>
             <td>
-                <button type="submit"  class="btn btn-outline-success" asp-controller="Reservation" asp-action="DetailsReserved" >Reservation for User Email</button>
+                <button type="submit"  class="btn btn-outline-success" asp-controller="User" asp-action="GetUserByEmail" >Reservation for User Email</button>
             </td>
             <td>
                 
@@ -82,6 +82,17 @@
         <tr>
             <td>
                 <button type="submit" class="btn btn-outline-success" asp-controller="Reservation" asp-action="DetailsReserved" >Reservation for User Name</button>
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" class="btn btn-outline-success" asp-controller="Reservation" asp-action="DetailsReserved" >Reservation for Status</button>
             </td>
             <td>
                 

@@ -9,4 +9,6 @@ public interface IReservationServices
     bool IsRoomFree(Reservation reservation);
     IEnumerable<RoomReservedDto> GetMyReservations();
     RoomReservedDto GetReservationById(int id);
+    RoomReservedDto GetActualReservationByRoomId(int id);
+    int GetActualReservationIdByRoomId(int id);
 }
