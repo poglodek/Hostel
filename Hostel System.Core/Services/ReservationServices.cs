@@ -90,6 +90,27 @@ namespace Hostel_System.Core.Services
             return reservation.Id;
         }
 
+        public IEnumerable<ReservedInfoDto> GetAllReservations(int page)
+        {
+            return _mapper.Map<IEnumerable<ReservedInfoDto>>(_hostelSystemDbContext
+                .Reservations
+                .Include(x=> x.BookingUser)
+                .Include(x=>x.BookingRoom)
+                .Skip(page * 10)
+                .Take(10)
+                .AsEnumerable());
+        }
+
+        public IEnumerable<ReservedInfoDto> GetAllReservationsFromRoom(string searchParse)
+        {
+            return _mapper.Map<IEnumerable<ReservedInfoDto>>(_hostelSystemDbContext
+                .Reservations
+                .Include(x => x.BookingUser)
+                .Include(x => x.BookingRoom)
+                .Where(x=> x.BookingRoom.RoomName.Contains(searchParse))
+                .AsEnumerable());
+        }
+
         private Reservation MapToReservation(RoomReservationDto roomReservationDto)
         {
             var dateFrom = DateTime.Parse(roomReservationDto.BookingFrom.ToShortDateString()).AddHours(11);

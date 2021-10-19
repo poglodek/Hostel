@@ -26,7 +26,7 @@
 
         <tr>
             <td>
-                <button type="submit"  class="btn btn-outline-success" asp-controller="Manager" asp-action="Test" >All Reservations</button>
+                <button type="submit"  class="btn btn-outline-success" asp-controller="Reservation" asp-action="AllReservations" >All Reservations</button>
             </td>
             <td>
                 <button type="submit"  class="btn btn-outline-info" asp-controller="Room" asp-action="Index" asp-route-page="0" > All Rooms</button>
@@ -37,7 +37,7 @@
         </tr>
         <tr>
             <td>
-                <button type="submit"  class="btn btn-outline-success" asp-controller="Reservation" asp-action="DetailsReserved" >Reservation for room</button>
+                <button type="submit"  class="btn btn-outline-success" asp-controller="Reservation" asp-action="ReservationsForRoom" >Reservation for room</button>
             </td>
             <td>
                 <button type="submit"  class="btn btn-outline-info" asp-controller="Room" asp-action="RoomName" > Room by room name</button>

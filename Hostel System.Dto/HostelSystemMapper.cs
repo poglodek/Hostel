@@ -16,6 +16,9 @@ namespace Hostel_System.Dto
             CreateMap<Room, RoomDto>().ReverseMap();
             CreateMap<RoomReservationDto, Reservation>().ReverseMap();
             CreateMap<Reservation, RoomReservedDto>().ReverseMap();
+            CreateMap<Reservation, ReservedInfoDto>()
+                .ForMember(x=> x.RoomName, z=> z.MapFrom(c=> c.BookingRoom.RoomName))
+                .ReverseMap();
         }
     }
 }

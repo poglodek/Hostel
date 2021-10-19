@@ -4,6 +4,7 @@ using Hostel_System.Mappers;
 using Hostel_System.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Hostel_System.Controllers
 {
@@ -73,6 +74,32 @@ namespace Hostel_System.Controllers
                 return RedirectToAction("Details", "Room", new { id });
             }
             return RedirectToAction("DetailsReserved", "Reservation", new { id = reservationId });
+        }
+        [HttpGet("ReservationList")]
+        [Authorize(Roles = "Admin,Manager")]
+        public IActionResult ReservationList()
+        {
+            var model = JsonConvert.DeserializeObject<IEnumerable<ReservedInfoModel>>(TempData["Reservation"] as string);
+            return View(model);
+        }
+
+        [HttpGet("AllReservations")]
+        [Authorize(Roles = "Admin,Manager")]
+        public IActionResult AllReservations([FromQuery] string SearchParse, int page)
+        {
+            ViewBag.Page = page;
+            var reservation = _reservationServices.GetAllReservations(page);
+            TempData["Reservation"] = JsonConvert.SerializeObject(reservation);
+            return View(_mapper.Map<IEnumerable<ReservedInfoModel>>(reservation));
+        }
+        [HttpGet("ReservationsForRoom")]
+        [Authorize(Roles = "Admin,Manager")]
+        public IActionResult ReservationsForRoom([FromQuery] string SearchParse)
+        {
+
+            var reservation = _reservationServices.GetAllReservationsFromRoom(SearchParse);
+            TempData["Reservation"] = JsonConvert.SerializeObject(reservation);
+            return RedirectToAction("ReservationList", "Reservation");
         }
 
 

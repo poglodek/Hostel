@@ -40,7 +40,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Reservation\ReservationList.cshtml" />
     <_ContentIncludedByDefault Remove="Views\User\Me.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Reservation\ReservationList.cshtml" />
   </ItemGroup>
 
 </Project>

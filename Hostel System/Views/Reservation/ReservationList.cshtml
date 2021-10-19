@@ -1,0 +1,58 @@
+﻿@model System.Collections.Generic.IEnumerable<Hostel_System.Model.ReservedInfoModel>
+
+@{
+    ViewBag.Title = "Reserved Rooms List";
+    Layout = "_Layout";
+}
+
+<h2>Reserved Rooms List</h2>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                Booking From
+            </th>
+            <th>
+                Booking To
+            </th>
+            <th>
+                Room Name
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Booking User
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody style="font-size:larger;">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(x=> item.BookingFrom)
+                </td> <td>
+                    @Html.DisplayFor(x=> item.BookingTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(x=> item.RoomName)
+                </td>
+                <td>
+                    @Html.DisplayFor(x=> item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(x=> item.BookingUser.FirstName)
+                    @Html.DisplayFor(x=> item.BookingUser.LastName)
+                </td>
+                <td>
+                    <a class="btn btn-outline-success" asp-controller="Room" asp-action="Details" asp-route-id="@item.Id">Details!</a>
+                </td>
+            </tr>
+            
+        }
+        </tbody>
+    </table>
+</div>

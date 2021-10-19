@@ -11,4 +11,6 @@ public interface IReservationServices
     RoomReservedDto GetReservationById(int id);
     RoomReservedDto GetActualReservationByRoomId(int id);
     int GetActualReservationIdByRoomId(int id);
+    IEnumerable<ReservedInfoDto> GetAllReservations(int page);
+    IEnumerable<ReservedInfoDto> GetAllReservationsFromRoom(string searchParse);
 }
