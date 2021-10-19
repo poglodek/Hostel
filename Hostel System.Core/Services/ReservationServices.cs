@@ -111,6 +111,46 @@ namespace Hostel_System.Core.Services
                 .AsEnumerable());
         }
 
+        public IEnumerable<ReservedInfoDto> GetAllReservationsForDate(string searchParse)
+        {
+            return _mapper.Map<IEnumerable<ReservedInfoDto>>(_hostelSystemDbContext
+                .Reservations
+                .Include(x => x.BookingUser)
+                .Include(x => x.BookingRoom)
+                .Where(x => x.BookingFrom < DateTime.Parse(searchParse) && x.BookingTo > DateTime.Parse(searchParse))
+                .AsEnumerable());
+        }
+
+        public IEnumerable<ReservedInfoDto> GetAllReservationsForStatus(string searchParse)
+        {
+            return _mapper.Map<IEnumerable<ReservedInfoDto>>(_hostelSystemDbContext
+                .Reservations
+                .Include(x => x.BookingUser)
+                .Include(x => x.BookingRoom)
+                .Where(x => x.Status.ToUpper().Contains(searchParse.ToUpper()))
+                .AsEnumerable());
+        }
+
+        public IEnumerable<ReservedInfoDto> GetAllReservationsForUserName(string searchParse)
+        {
+            return _mapper.Map<IEnumerable<ReservedInfoDto>>(_hostelSystemDbContext
+                .Reservations
+                .Include(x => x.BookingUser)
+                .Include(x => x.BookingRoom)
+                .Where(x => (x.BookingUser.FirstName + " " + x.BookingUser.LastName).ToUpper().Contains(searchParse.ToUpper()))
+                .AsEnumerable());
+        }
+
+        public IEnumerable<ReservedInfoDto> GetAllReservationsForUserEmail(string searchParse)
+        {
+            return _mapper.Map<IEnumerable<ReservedInfoDto>>(_hostelSystemDbContext
+                .Reservations
+                .Include(x => x.BookingUser)
+                .Include(x => x.BookingRoom)
+                .Where(x => x.BookingUser.Email.ToUpper().Contains(searchParse.ToUpper()))
+                .AsEnumerable());
+        }
+
         private Reservation MapToReservation(RoomReservationDto roomReservationDto)
         {
             var dateFrom = DateTime.Parse(roomReservationDto.BookingFrom.ToShortDateString()).AddHours(11);

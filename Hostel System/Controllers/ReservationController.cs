@@ -80,6 +80,7 @@ namespace Hostel_System.Controllers
         public IActionResult ReservationList()
         {
             var model = JsonConvert.DeserializeObject<IEnumerable<ReservedInfoModel>>(TempData["Reservation"] as string);
+            if(model is null ) return RedirectToAction("Index", "Manager");
             return View(model);
         }
 
@@ -96,12 +97,46 @@ namespace Hostel_System.Controllers
         [Authorize(Roles = "Admin,Manager")]
         public IActionResult ReservationsForRoom([FromQuery] string SearchParse)
         {
-
             var reservation = _reservationServices.GetAllReservationsFromRoom(SearchParse);
             TempData["Reservation"] = JsonConvert.SerializeObject(reservation);
             return RedirectToAction("ReservationList", "Reservation");
         }
 
-
+        [HttpGet("ReservationsForDate")]
+        [Authorize(Roles = "Admin,Manager")]
+        public IActionResult ReservationsForDate([FromQuery] string SearchParse)
+        {
+            if (!DateTime.TryParse(SearchParse, out var nevermind))
+            {
+                return RedirectToAction("Index", "Manager");
+            }
+            var reservation = _reservationServices.GetAllReservationsForDate(SearchParse);
+            TempData["Reservation"] = JsonConvert.SerializeObject(reservation);
+            return RedirectToAction("ReservationList", "Reservation");
+        }
+        [HttpGet("ReservationsForStatus")]
+        [Authorize(Roles = "Admin,Manager")]
+        public IActionResult ReservationsForStatus([FromQuery] string SearchParse)
+        {
+            var reservation = _reservationServices.GetAllReservationsForStatus(SearchParse);
+            TempData["Reservation"] = JsonConvert.SerializeObject(reservation);
+            return RedirectToAction("ReservationList", "Reservation");
+        }
+        [HttpGet("ReservationsForStatus")]
+        [Authorize(Roles = "Admin,Manager")]
+        public IActionResult ReservationsForUserName([FromQuery] string SearchParse)
+        {
+            var reservation = _reservationServices.GetAllReservationsForUserName(SearchParse);
+            TempData["Reservation"] = JsonConvert.SerializeObject(reservation);
+            return RedirectToAction("ReservationList", "Reservation");
+        }
+        [HttpGet("ReservationsForStatus")]
+        [Authorize(Roles = "Admin,Manager")]
+        public IActionResult ReservationsForUserEmail([FromQuery] string SearchParse)
+        {
+            var reservation = _reservationServices.GetAllReservationsForUserEmail(SearchParse);
+            TempData["Reservation"] = JsonConvert.SerializeObject(reservation);
+            return RedirectToAction("ReservationList", "Reservation");
+        }
     }
 }
