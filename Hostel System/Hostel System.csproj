@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Hostel_System</RootNamespace>
+    <Configurations>Debug;Release;Rebuild</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

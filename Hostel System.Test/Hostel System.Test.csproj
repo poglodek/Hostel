@@ -5,6 +5,7 @@
     <RootNamespace>Hostel_System.Test</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Configurations>Debug;Release;Rebuild</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

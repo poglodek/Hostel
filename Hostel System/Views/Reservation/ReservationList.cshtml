@@ -7,6 +7,7 @@
 
 <h2>Reserved Rooms List</h2>
 <div class="table-responsive">
+
     <table class="table">
         <thead>
         <tr>
@@ -28,31 +29,33 @@
             <th></th>
         </tr>
         </thead>
-        <tbody style="font-size:larger;">
+        <tbody style="font-size: larger;">
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(x=> item.BookingFrom)
-                </td> <td>
-                    @Html.DisplayFor(x=> item.BookingTo)
+                    @Html.DisplayFor(x => item.BookingFrom)
                 </td>
                 <td>
-                    @Html.DisplayFor(x=> item.RoomName)
+                    @Html.DisplayFor(x => item.BookingTo)
                 </td>
                 <td>
-                    @Html.DisplayFor(x=> item.Status)
+                    @Html.DisplayFor(x => item.RoomName)
                 </td>
                 <td>
-                    @Html.DisplayFor(x=> item.BookingUser.FirstName)
-                    @Html.DisplayFor(x=> item.BookingUser.LastName)
+                    @Html.DisplayFor(x => item.Status)
                 </td>
                 <td>
-                    <a class="btn btn-outline-success" asp-controller="Room" asp-action="Details" asp-route-id="@item.Id">Details!</a>
+                    @Html.DisplayFor(x => item.BookingUser.FirstName)
+                    @Html.DisplayFor(x => item.BookingUser.LastName)
+                </td>
+                <td>
+                    <a class="btn btn-outline-success" asp-controller="Reservation" asp-action="DetailsReserved" asp-route-id="@item.Id">Details!</a>
                 </td>
             </tr>
-            
+
         }
         </tbody>
     </table>
 </div>
+

@@ -138,5 +138,12 @@ namespace Hostel_System.Controllers
             TempData["Reservation"] = JsonConvert.SerializeObject(reservation);
             return RedirectToAction("ReservationList", "Reservation");
         }
+        [HttpPost("ChangeStatus")]
+        [Authorize(Roles = "Admin,Manager")]
+        public IActionResult ChangeStatus(RoomReservedModel roomReservedModel)
+        {
+            _reservationServices.UpDateStatus(roomReservedModel.Id, roomReservedModel.Status);
+         return RedirectToAction("DetailsReserved", "Reservation", new {id = roomReservedModel.Id});
+        }
     }
 }

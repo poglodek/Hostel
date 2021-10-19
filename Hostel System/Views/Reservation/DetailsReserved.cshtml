@@ -4,15 +4,29 @@
     ViewBag.Title = "Reservation";
     Layout = "_Layout";
 }
+<form asp-controller="Reservation" asp-action="ChangeStatus" method="post">
+    @Html.HiddenFor(x=> x.Id)
+    <h2>Reservation From @Html.DisplayFor(x => x.BookingFrom) to : @Html.DisplayFor(x => x.BookingTo)</h2> <br/>
+    <p>Name: @Html.DisplayFor(x => x.BookingUser.FirstName)
+        @Html.DisplayFor(x => x.BookingUser.LastName)</p>
+    <p>Email: @Html.DisplayFor(x => x.BookingUser.Email) </p>
+    <p>Room name: @Html.DisplayFor(x => x.Room.RoomName) </p>
+    <p>Additional Information: @Html.DisplayFor(x => x.AdditionalInformation) </p>
+    @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+    {
+        <div class="form-group">
+            <label for="Status">Status:</label>
+            <input asp-for="Status" type="text" class="form-control" placeholder="Status">
+        </div>
+        <button class="btn btn-outline-secondary" type="submit">
+            <h3>Save!</h3></button>
+    }
+    else
+    {
+        <p>Status: @Html.DisplayFor(x => x.Status) </p>
+    }
 
-<h2>Reservation From @Html.DisplayFor(x=>x.BookingFrom) to : @Html.DisplayFor(x=>x.BookingTo)</h2> <br />
-<p>Name: @Html.DisplayFor(x=>x.BookingUser.FirstName)
-    @Html.DisplayFor(x=>x.BookingUser.LastName)</p>
-    <p>Email: @Html.DisplayFor(x=>x.BookingUser.Email) </p>
-    <p>Room name: @Html.DisplayFor(x=>x.Room.RoomName) </p>
-    <p>Additional Information: @Html.DisplayFor(x=>x.AdditionalInformation) </p>
-    <p>Status: @Html.DisplayFor(x=>x.Status) </p>
-<p>TotalCost: @Html.DisplayFor(x=>x.TotalCost)$</p>
-
+    <p>TotalCost: @Html.DisplayFor(x => x.TotalCost)$</p>
+</form>
 <br />
 <a class="btn btn-outline-info" href="mailto:info@Hostel_System.com">Contact with us!</a>

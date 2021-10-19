@@ -1,4 +1,7 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using Hostel_System.Core.Exception;
 using Hostel_System.Core.IServices;
 using Hostel_System.Database;
@@ -149,6 +152,15 @@ namespace Hostel_System.Core.Services
                 .Include(x => x.BookingRoom)
                 .Where(x => x.BookingUser.Email.ToUpper().Contains(searchParse.ToUpper()))
                 .AsEnumerable());
+        }
+
+        public void UpDateStatus(int id, string status)
+        {
+            var reservation = _hostelSystemDbContext
+                .Reservations
+                .FirstOrDefault(x => x.Id == id);
+            reservation.Status = status;
+            _hostelSystemDbContext.SaveChanges();
         }
 
         private Reservation MapToReservation(RoomReservationDto roomReservationDto)
