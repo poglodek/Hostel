@@ -8,7 +8,7 @@ public interface IReservationServices
     bool Book(RoomReservationDto roomReservationDto);
     bool IsRoomFree(Reservation reservation);
     IEnumerable<RoomReservedDto> GetMyReservations();
-    RoomReservedDto GetReservationById(int id);
+    RoomReservedDto GetReservationDtoById(int id);
     RoomReservedDto GetActualReservationByRoomId(int id);
     int GetActualReservationIdByRoomId(int id);
     IEnumerable<ReservedInfoDto> GetAllReservations(int page);
@@ -18,4 +18,5 @@ public interface IReservationServices
     IEnumerable<ReservedInfoDto> GetAllReservationsForUserName(string searchParse);
     IEnumerable<ReservedInfoDto> GetAllReservationsForUserEmail(string searchParse);
     void UpDateStatus(int id,string status);
+    void RemoveReservation(int id);
 }

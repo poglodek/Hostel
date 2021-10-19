@@ -61,7 +61,7 @@ namespace Hostel_System.Core.Services
             return _mapper.Map<IEnumerable<RoomReservedDto>>(reservations);
         }
 
-        public RoomReservedDto GetReservationById(int id)
+        public RoomReservedDto GetReservationDtoById(int id)
         {
             var reservation = _hostelSystemDbContext
                 .Reservations
@@ -156,13 +156,24 @@ namespace Hostel_System.Core.Services
 
         public void UpDateStatus(int id, string status)
         {
-            var reservation = _hostelSystemDbContext
-                .Reservations
-                .FirstOrDefault(x => x.Id == id);
+            var reservation = GetReservationById(id);
             reservation.Status = status;
             _hostelSystemDbContext.SaveChanges();
         }
 
+        public void RemoveReservation(int id)
+        {
+            var reservations = GetReservationById(id);
+            _hostelSystemDbContext.Reservations.Remove(reservations);
+            _hostelSystemDbContext.SaveChanges();
+        }
+
+        private Reservation GetReservationById(int id)
+        {
+            return _hostelSystemDbContext
+                .Reservations
+                .FirstOrDefault(x => x.Id == id);
+        }
         private Reservation MapToReservation(RoomReservationDto roomReservationDto)
         {
             var dateFrom = DateTime.Parse(roomReservationDto.BookingFrom.ToShortDateString()).AddHours(11);

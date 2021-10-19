@@ -60,7 +60,7 @@ namespace Hostel_System.Controllers
         [HttpGet("DetailsReserved/{id}")]
         public IActionResult DetailsReserved(int id)
         {
-            var reservation = _reservationServices.GetReservationById(id);
+            var reservation = _reservationServices.GetReservationDtoById(id);
             return View(_mapper.Map<RoomReservedModel>(reservation));
         }
 
@@ -144,6 +144,13 @@ namespace Hostel_System.Controllers
         {
             _reservationServices.UpDateStatus(roomReservedModel.Id, roomReservedModel.Status);
          return RedirectToAction("DetailsReserved", "Reservation", new {id = roomReservedModel.Id});
+        }
+        [Authorize(Roles = "Admin,Manager")]
+        [Route("RemoveReservation/{id}")]
+        public IActionResult RemoveReservation([FromRoute]int id)
+        {
+            _reservationServices.RemoveReservation(id);
+            return RedirectToAction("AllReservations", "Reservation");
         }
     }
 }

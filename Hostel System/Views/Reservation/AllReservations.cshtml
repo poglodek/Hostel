@@ -27,6 +27,7 @@
                 Booking User
             </th>
             <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody style="font-size:larger;">
@@ -50,6 +51,7 @@
                 </td>
                 <td>
                     <a class="btn btn-outline-success" asp-controller="Reservation" asp-action="DetailsReserved" asp-route-id="@item.Id">Details!</a>
+                    <a class="btn btn-outline-danger"asp asp-controller="Reservation" asp-action="RemoveReservation" asp-route-id="@item.Id">Remove Reservation!</a>
                 </td>
             </tr>
             
