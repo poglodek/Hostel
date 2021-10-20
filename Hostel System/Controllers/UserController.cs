@@ -118,5 +118,29 @@ namespace Hostel_System.Controllers
             TempData["Users"] = JsonConvert.SerializeObject(users);
             return RedirectToAction("UsersList", "User");
         }
+        [HttpGet("ForgotPassword")]
+        public IActionResult ForgotPassword([FromQuery] string mail)
+        {
+            _userServices.ForgotPassword(mail);
+            return View();
+        }
+        [HttpGet("ChangePassword")]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+        [HttpPost("ChangePassword")]
+        public IActionResult ChangePassword(ChangePasswordModel changePasswordModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Result = false;
+                return View();
+            }
+
+            var result = _userServices.ChangePassword(_mapper.Map<ChangePasswordDto>(changePasswordModel));
+            ViewBag.Result = result;
+            return View();
+        }
     }
 }

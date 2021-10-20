@@ -18,6 +18,7 @@ namespace Hostel_System.Mappers
                 config.CreateMap<RoomDto, RoomReservationModel>().ReverseMap();
                 config.CreateMap<UserDto, UserModel>().ReverseMap();
                 config.CreateMap<RoomReservationDto, RoomReservationModel>().ReverseMap();
+                config.CreateMap<ChangePasswordDto, ChangePasswordModel>().ReverseMap();
                 config.CreateMap<RoomReservedDto, RoomReservedModel>()
                     .ForMember(x=> x.BookingUser,z=>z.MapFrom(c=>c.BookingUser))
                     .ReverseMap();

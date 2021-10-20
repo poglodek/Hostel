@@ -16,16 +16,19 @@ namespace Hostel_System.Core.Services
         private readonly HostelSystemDbContext _hostelSystemDbContext;
         private readonly IMapper _mapper;
         private readonly IPasswordHasher<User> _passwordHasher;
+        private readonly IMailServices _mailServices;
         private readonly IRoleServices _roleServices;
 
         public UserServices(HostelSystemDbContext hostelSystemDbContext
             , IMapper mapper,
             IPasswordHasher<User> passwordHasher,
+            IMailServices mailServices,
             IRoleServices roleServices)
         {
             _hostelSystemDbContext = hostelSystemDbContext;
             _mapper = mapper;
             _passwordHasher = passwordHasher;
+            _mailServices = mailServices;
             _roleServices = roleServices;
         }
         public int RegisterUser(RegisterUserDto userDto)
@@ -39,11 +42,27 @@ namespace Hostel_System.Core.Services
             _hostelSystemDbContext.SaveChanges();
             return user.Id;
         }
+        public int CreateUser(RegisterUserDto userDto)
+        {
+            if (CheckIfUserExist(userDto.Email)) return -1;
+            var user = _mapper.Map<User>(userDto);
+            user.RoleName = _roleServices.GetDefaultRole();
+            user.Password = "";
+            _hostelSystemDbContext.Users.Add(user);
+            _hostelSystemDbContext.SaveChanges();
+            return user.Id;
+        }
+
+        public void ForgotPassword(string email)
+        {
+            var user = GetUserByEmail(email);
+            _mailServices.ForgotPassword(email, user);
+        }
 
         public bool VerifyUser(LoginDto loginDto)
         {
             var user = GetUserByEmail(loginDto.Email);
-            if (user is null) return false;
+            if (user is null || string.IsNullOrWhiteSpace(user.Password)) return false;
             var result = _passwordHasher.VerifyHashedPassword(user, user.Password, loginDto.Password);
             if (result == PasswordVerificationResult.Failed) return false;
             return true;
@@ -93,6 +112,18 @@ namespace Hostel_System.Core.Services
                 .Users
                 .Where(x => x.Email.Contains(searchParse))
                 .AsQueryable());
+        }
+
+        public bool ChangePassword(ChangePasswordDto changePasswordDto)
+        {
+            var user = GetUserByEmail(changePasswordDto.Email);
+            var oldPasswordCorrect =
+                _passwordHasher.VerifyHashedPassword(user, user.Password, changePasswordDto.ActualPassword);
+            if (oldPasswordCorrect == PasswordVerificationResult.Failed || changePasswordDto.ReTypNewPassword != changePasswordDto.NewPassword) return false;
+            var newPassword = _passwordHasher.HashPassword(user, changePasswordDto.NewPassword);
+            user.Password = newPassword;
+            _hostelSystemDbContext.SaveChanges();
+            return true;
         }
 
         private List<Claim> GetClaims(User user)

@@ -42,11 +42,16 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Reservation\ReservationList.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\User\ForgotPassword.cshtml" />
     <_ContentIncludedByDefault Remove="Views\User\Me.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Reservation\ReservationList.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\User\ForgotPassword.cshtml" />
   </ItemGroup>
 
 </Project>
