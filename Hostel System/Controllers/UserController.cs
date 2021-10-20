@@ -114,6 +114,12 @@ namespace Hostel_System.Controllers
             TempData["Users"] = JsonConvert.SerializeObject(_userServices.GetUsersByEmail(SearchParse));
             return RedirectToAction("UsersList", "User");
         }
+        [HttpGet("Get/{id}")]
+        [Authorize(Roles = "Admin,Manager")]
+        public IActionResult GetUser([FromRoute] int id)
+        {
+            return View(_mapper.Map<UserModel>(_userServices.GetUserDtoById(id)));
+        }
         [HttpGet("ForgotPassword")]
         public IActionResult ForgotPassword([FromQuery] string mail)
         {
@@ -136,10 +142,21 @@ namespace Hostel_System.Controllers
             ViewBag.Result = _userServices.ChangePassword(_mapper.Map<ChangePasswordDto>(changePasswordModel));
             return View();
         }
+        [HttpGet("ChangeData/{id}")]
+        public IActionResult ChangeData([FromRoute]int id)
+        {
+            return View(_mapper.Map<UserModel>(_userServices.GetUserDtoById(id)));
+        }
         [HttpGet("ChangeData")]
         public IActionResult ChangeData()
         {
             return View(_mapper.Map<UserModel>(_userServices.GetUserDtoById(int.Parse(HttpContext.User.FindFirst(x => x.Type == ClaimTypes.NameIdentifier).Value))));
+        }
+        [HttpPost("ChangeData/{id}")]
+        public IActionResult ChangeData(UserModel userModel, [FromRoute]int id)
+        {
+            ViewBag.Result = _userServices.ChangeData(_mapper.Map<UserDto>(userModel));
+            return View(userModel);
         }
         [HttpPost("ChangeData")]
         public IActionResult ChangeData(UserModel userModel)
