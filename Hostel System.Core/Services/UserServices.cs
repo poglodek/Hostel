@@ -126,6 +126,26 @@ namespace Hostel_System.Core.Services
             return true;
         }
 
+        public bool ChangeData(UserDto userDto)
+        {
+            var user = GetUserById(userDto.Id);
+            if (user is null) return false;
+            user.Address = userDto.Address;
+            user.FirstName = userDto.FirstName;
+            user.LastName = userDto.LastName;
+            user.BirthDay = userDto.BirthDay;
+            user.CarRegistrationNumber = userDto.CarRegistrationNumber;
+            user.Phone = userDto.Phone;
+            _hostelSystemDbContext.SaveChanges();
+            return true;
+
+        }
+
+        public UserDto GetUserDtoById(int id)
+        {
+            return _mapper.Map<UserDto>(GetUserById(id));
+        }
+
         private List<Claim> GetClaims(User user)
         {
             if (user is null) throw new NotFoundException("User not found.");

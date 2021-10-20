@@ -1,4 +1,5 @@
-﻿using Hostel_System.Core.IServices;
+﻿using System.Security.Claims;
+using Hostel_System.Core.IServices;
 using Hostel_System.Dto.Dto;
 using Hostel_System.Mappers;
 using Hostel_System.Model;
@@ -141,6 +142,18 @@ namespace Hostel_System.Controllers
             var result = _userServices.ChangePassword(_mapper.Map<ChangePasswordDto>(changePasswordModel));
             ViewBag.Result = result;
             return View();
+        }
+        [HttpGet("ChangeData")]
+        public IActionResult ChangeData()
+        {
+            return View(_mapper.Map<UserModel>(_userServices.GetUserDtoById(int.Parse(HttpContext.User.FindFirst(x=> x.Type == ClaimTypes.NameIdentifier).Value))));
+        }
+        [HttpPost("ChangeData")]
+        public IActionResult ChangeData(UserModel userModel)
+        {
+            var result = _userServices.ChangeData(_mapper.Map<UserDto>(userModel));
+            ViewBag.Result = result;
+            return View(userModel);
         }
     }
 }

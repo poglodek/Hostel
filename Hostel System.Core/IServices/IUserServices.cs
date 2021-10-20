@@ -17,4 +17,6 @@ public interface IUserServices
     IEnumerable<UserDto> GetUsersByPhone(string searchParse);
     IEnumerable<UserDto> GetUsersByEmail(string searchParse);
     bool ChangePassword(ChangePasswordDto changePasswordDto);
+    bool ChangeData(UserDto userDto);
+    UserDto GetUserDtoById(int id);
 }
