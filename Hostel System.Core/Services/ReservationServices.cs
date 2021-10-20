@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using Hostel_System.Core.Exception;
 using Hostel_System.Core.IServices;
 using Hostel_System.Database;
@@ -45,20 +42,19 @@ namespace Hostel_System.Core.Services
 
         public bool IsRoomFree(Reservation reservation)
         {
-           return ! _hostelSystemDbContext.Reservations
-                 .Any(x => x.BookingRoom == reservation.BookingRoom && x.BookingFrom < reservation.BookingFrom &&
-                           x.BookingTo > reservation.BookingTo);
+            return !_hostelSystemDbContext.Reservations
+                  .Any(x => x.BookingRoom == reservation.BookingRoom && x.BookingFrom < reservation.BookingFrom &&
+                            x.BookingTo > reservation.BookingTo);
         }
 
         public IEnumerable<RoomReservedDto> GetMyReservations()
         {
-            var reservations = _hostelSystemDbContext
+            return _mapper.Map<IEnumerable<RoomReservedDto>>(_hostelSystemDbContext
                 .Reservations
                 .Include(x => x.BookingUser)
                 .Include(x => x.BookingRoom)
                 .Where(x => x.BookingUser.Id == _userContextServices.GetUserId())
-                .AsEnumerable();
-            return _mapper.Map<IEnumerable<RoomReservedDto>>(reservations);
+                .AsEnumerable());
         }
 
         public RoomReservedDto GetReservationDtoById(int id)
@@ -89,16 +85,15 @@ namespace Hostel_System.Core.Services
                 .Include(x => x.BookingUser)
                 .FirstOrDefault(x =>
                     x.BookingRoom.Id == id && x.BookingFrom < DateTime.Now && x.BookingTo > DateTime.Now);
-            if (reservation is null) return -1;
-            return reservation.Id;
+            return reservation.Id == -1 ? -1 : reservation.Id;
         }
 
         public IEnumerable<ReservedInfoDto> GetAllReservations(int page)
         {
             return _mapper.Map<IEnumerable<ReservedInfoDto>>(_hostelSystemDbContext
                 .Reservations
-                .Include(x=> x.BookingUser)
-                .Include(x=>x.BookingRoom)
+                .Include(x => x.BookingUser)
+                .Include(x => x.BookingRoom)
                 .Skip(page * 10)
                 .Take(10)
                 .AsEnumerable());
@@ -110,7 +105,7 @@ namespace Hostel_System.Core.Services
                 .Reservations
                 .Include(x => x.BookingUser)
                 .Include(x => x.BookingRoom)
-                .Where(x=> x.BookingRoom.RoomName.Contains(searchParse))
+                .Where(x => x.BookingRoom.RoomName.Contains(searchParse))
                 .AsEnumerable());
         }
 
@@ -163,8 +158,7 @@ namespace Hostel_System.Core.Services
 
         public void RemoveReservation(int id)
         {
-            var reservations = GetReservationById(id);
-            _hostelSystemDbContext.Reservations.Remove(reservations);
+            _hostelSystemDbContext.Reservations.Remove(GetReservationById(id));
             _hostelSystemDbContext.SaveChanges();
         }
 

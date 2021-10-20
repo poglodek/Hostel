@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hostel_System.Model;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hostel_System.Controllers
@@ -17,12 +11,6 @@ namespace Hostel_System.Controllers
         public IActionResult Index()
         {
             return View();
-        }
-        [HttpGet("test")]
-        public IActionResult Test([FromQuery]string SearchParse)
-        {
-            var a = SearchParse;
-            return Ok(a);
         }
     }
 }

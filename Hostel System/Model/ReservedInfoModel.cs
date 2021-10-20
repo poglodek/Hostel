@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hostel_System.Dto.Dto;
-
-namespace Hostel_System.Model
+﻿namespace Hostel_System.Model
 {
     public class ReservedInfoModel
     {

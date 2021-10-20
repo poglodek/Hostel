@@ -17,6 +17,6 @@ public interface IReservationServices
     IEnumerable<ReservedInfoDto> GetAllReservationsForStatus(string searchParse);
     IEnumerable<ReservedInfoDto> GetAllReservationsForUserName(string searchParse);
     IEnumerable<ReservedInfoDto> GetAllReservationsForUserEmail(string searchParse);
-    void UpDateStatus(int id,string status);
+    void UpDateStatus(int id, string status);
     void RemoveReservation(int id);
 }

@@ -1,6 +1,4 @@
-﻿using Hostel_System.Database.Entity;
-
-namespace Hostel_System.Dto.Dto
+﻿namespace Hostel_System.Dto.Dto
 {
     public class ReservedInfoDto
     {

@@ -49,19 +49,18 @@ namespace Hostel_System.Controllers
                 ViewBag.ErrorMessage = "This Date is busy";
                 return View();
             }
-            return Ok("TODO, room booked!");
+            ViewBag.ErrorMessage = "TODO, room booked!";
+            return View();
         }
         [Route("history")]
         public IActionResult History()
         {
-            var reservations = _reservationServices.GetMyReservations();
-            return View(_mapper.Map<IEnumerable<RoomReservedModel>>(reservations));
+            return View(_mapper.Map<IEnumerable<RoomReservedModel>>(_reservationServices.GetMyReservations()));
         }
         [HttpGet("DetailsReserved/{id}")]
         public IActionResult DetailsReserved(int id)
         {
-            var reservation = _reservationServices.GetReservationDtoById(id);
-            return View(_mapper.Map<RoomReservedModel>(reservation));
+            return View(_mapper.Map<RoomReservedModel>(_reservationServices.GetReservationDtoById(id)));
         }
 
         [HttpGet("ActualReservedByRoom")]
@@ -80,7 +79,7 @@ namespace Hostel_System.Controllers
         public IActionResult ReservationList()
         {
             var model = JsonConvert.DeserializeObject<IEnumerable<ReservedInfoModel>>(TempData["Reservation"] as string);
-            if(model is null ) return RedirectToAction("Index", "Manager");
+            if (model is null) return RedirectToAction("Index", "Manager");
             return View(model);
         }
 
@@ -97,8 +96,7 @@ namespace Hostel_System.Controllers
         [Authorize(Roles = "Admin,Manager")]
         public IActionResult ReservationsForRoom([FromQuery] string SearchParse)
         {
-            var reservation = _reservationServices.GetAllReservationsFromRoom(SearchParse);
-            TempData["Reservation"] = JsonConvert.SerializeObject(reservation);
+            TempData["Reservation"] = JsonConvert.SerializeObject(_reservationServices.GetAllReservationsFromRoom(SearchParse));
             return RedirectToAction("ReservationList", "Reservation");
         }
 
@@ -110,32 +108,28 @@ namespace Hostel_System.Controllers
             {
                 return RedirectToAction("Index", "Manager");
             }
-            var reservation = _reservationServices.GetAllReservationsForDate(SearchParse);
-            TempData["Reservation"] = JsonConvert.SerializeObject(reservation);
+            TempData["Reservation"] = JsonConvert.SerializeObject(_reservationServices.GetAllReservationsForDate(SearchParse));
             return RedirectToAction("ReservationList", "Reservation");
         }
         [HttpGet("ReservationsForStatus")]
         [Authorize(Roles = "Admin,Manager")]
         public IActionResult ReservationsForStatus([FromQuery] string SearchParse)
         {
-            var reservation = _reservationServices.GetAllReservationsForStatus(SearchParse);
-            TempData["Reservation"] = JsonConvert.SerializeObject(reservation);
+            TempData["Reservation"] = JsonConvert.SerializeObject(_reservationServices.GetAllReservationsForStatus(SearchParse));
             return RedirectToAction("ReservationList", "Reservation");
         }
         [HttpGet("ReservationsForStatus")]
         [Authorize(Roles = "Admin,Manager")]
         public IActionResult ReservationsForUserName([FromQuery] string SearchParse)
         {
-            var reservation = _reservationServices.GetAllReservationsForUserName(SearchParse);
-            TempData["Reservation"] = JsonConvert.SerializeObject(reservation);
+            TempData["Reservation"] = JsonConvert.SerializeObject(_reservationServices.GetAllReservationsForUserName(SearchParse));
             return RedirectToAction("ReservationList", "Reservation");
         }
         [HttpGet("ReservationsForStatus")]
         [Authorize(Roles = "Admin,Manager")]
         public IActionResult ReservationsForUserEmail([FromQuery] string SearchParse)
         {
-            var reservation = _reservationServices.GetAllReservationsForUserEmail(SearchParse);
-            TempData["Reservation"] = JsonConvert.SerializeObject(reservation);
+            TempData["Reservation"] = JsonConvert.SerializeObject(_reservationServices.GetAllReservationsForUserEmail(SearchParse));
             return RedirectToAction("ReservationList", "Reservation");
         }
         [HttpPost("ChangeStatus")]
@@ -143,11 +137,11 @@ namespace Hostel_System.Controllers
         public IActionResult ChangeStatus(RoomReservedModel roomReservedModel)
         {
             _reservationServices.UpDateStatus(roomReservedModel.Id, roomReservedModel.Status);
-         return RedirectToAction("DetailsReserved", "Reservation", new {id = roomReservedModel.Id});
+            return RedirectToAction("DetailsReserved", "Reservation", new { id = roomReservedModel.Id });
         }
         [Authorize(Roles = "Admin,Manager")]
         [Route("RemoveReservation/{id}")]
-        public IActionResult RemoveReservation([FromRoute]int id)
+        public IActionResult RemoveReservation([FromRoute] int id)
         {
             _reservationServices.RemoveReservation(id);
             return RedirectToAction("AllReservations", "Reservation");

@@ -94,7 +94,7 @@ namespace Hostel_System.Core.Services
         {
             return _mapper.Map<IEnumerable<UserDto>>(_hostelSystemDbContext
                 .Users
-                .Where(x=> (x.FirstName + " " + x.LastName).Contains(searchParse))
+                .Where(x => (x.FirstName + " " + x.LastName).Contains(searchParse))
                 .AsQueryable());
         }
 

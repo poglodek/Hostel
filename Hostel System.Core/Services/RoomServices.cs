@@ -21,12 +21,11 @@ namespace Hostel_System.Core.Services
 
         public IEnumerable<RoomDto> GetRooms(int page)
         {
-            var rooms = _hostelSystemDbContext
+            return _mapper.Map<IEnumerable<RoomDto>>(_hostelSystemDbContext
                 .Rooms
                 .Skip(page * 10)
                 .Take(10)
-                .AsEnumerable();
-            return _mapper.Map<IEnumerable<RoomDto>>(rooms);
+                .AsEnumerable());
         }
 
         public RoomDto GetRoomDto(int id)

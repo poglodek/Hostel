@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using Hostel_System.Core.IServices;
+﻿using Hostel_System.Core.IServices;
 using Hostel_System.Database;
 using Hostel_System.Database.Entity;
+using System.Net;
+using System.Net.Mail;
 
 namespace Hostel_System.Core.Services
 {

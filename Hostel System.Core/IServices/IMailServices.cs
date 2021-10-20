@@ -1,5 +1,5 @@
-﻿using System.Net.Mail;
-using Hostel_System.Database.Entity;
+﻿using Hostel_System.Database.Entity;
+using System.Net.Mail;
 
 namespace Hostel_System.Core.IServices;
 

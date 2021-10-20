@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using Hostel_System.Core.IServices;
+﻿using Hostel_System.Core.IServices;
 using Hostel_System.Dto.Dto;
 using Hostel_System.Mappers;
 using Hostel_System.Model;
@@ -8,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace Hostel_System.Controllers
 {
@@ -60,8 +60,7 @@ namespace Hostel_System.Controllers
                 ViewBag.ErrorMessage = "All fields required!";
                 return View();
             }
-            var registerUserDto = _mapper.Map<RegisterUserDto>(registerUserModel);
-            var userId = _userServices.RegisterUser(registerUserDto);
+            var userId = _userServices.RegisterUser(_mapper.Map<RegisterUserDto>(registerUserModel));
             if (userId == -1)
             {
                 ViewBag.ErrorMessage = "User Exist! Please Login in!";
@@ -84,16 +83,14 @@ namespace Hostel_System.Controllers
         [Authorize(Roles = "Admin,Manager")]
         public IActionResult AllUsers([FromQuery] string SearchParse)
         {
-            var users = _userServices.GetAllUsers();
-            TempData["Users"] = JsonConvert.SerializeObject(users);
+            TempData["Users"] = JsonConvert.SerializeObject(_userServices.GetAllUsers());
             return RedirectToAction("UsersList", "User");
         }
         [HttpGet("GetUserByName")]
         [Authorize(Roles = "Admin,Manager")]
         public IActionResult GetUserByName([FromQuery] string SearchParse)
         {
-            var users = _userServices.GetUsersByName(SearchParse);
-            TempData["Users"] = JsonConvert.SerializeObject(users);
+            TempData["Users"] = JsonConvert.SerializeObject(_userServices.GetUsersByName(SearchParse));
             return RedirectToAction("UsersList", "User");
         }
         [HttpGet("UsersList")]
@@ -107,16 +104,14 @@ namespace Hostel_System.Controllers
         [Authorize(Roles = "Admin,Manager")]
         public IActionResult GetUserByPhone([FromQuery] string SearchParse)
         {
-            var users = _userServices.GetUsersByPhone(SearchParse);
-            TempData["Users"] = JsonConvert.SerializeObject(users);
+            TempData["Users"] = JsonConvert.SerializeObject(_userServices.GetUsersByPhone(SearchParse));
             return RedirectToAction("UsersList", "User");
         }
         [HttpGet("GetUserByEmail")]
         [Authorize(Roles = "Admin,Manager")]
         public IActionResult GetUserByEmail([FromQuery] string SearchParse)
         {
-            var users = _userServices.GetUsersByEmail(SearchParse);
-            TempData["Users"] = JsonConvert.SerializeObject(users);
+            TempData["Users"] = JsonConvert.SerializeObject(_userServices.GetUsersByEmail(SearchParse));
             return RedirectToAction("UsersList", "User");
         }
         [HttpGet("ForgotPassword")]
@@ -138,21 +133,18 @@ namespace Hostel_System.Controllers
                 ViewBag.Result = false;
                 return View();
             }
-
-            var result = _userServices.ChangePassword(_mapper.Map<ChangePasswordDto>(changePasswordModel));
-            ViewBag.Result = result;
+            ViewBag.Result = _userServices.ChangePassword(_mapper.Map<ChangePasswordDto>(changePasswordModel));
             return View();
         }
         [HttpGet("ChangeData")]
         public IActionResult ChangeData()
         {
-            return View(_mapper.Map<UserModel>(_userServices.GetUserDtoById(int.Parse(HttpContext.User.FindFirst(x=> x.Type == ClaimTypes.NameIdentifier).Value))));
+            return View(_mapper.Map<UserModel>(_userServices.GetUserDtoById(int.Parse(HttpContext.User.FindFirst(x => x.Type == ClaimTypes.NameIdentifier).Value))));
         }
         [HttpPost("ChangeData")]
         public IActionResult ChangeData(UserModel userModel)
         {
-            var result = _userServices.ChangeData(_mapper.Map<UserDto>(userModel));
-            ViewBag.Result = result;
+            ViewBag.Result = _userServices.ChangeData(_mapper.Map<UserDto>(userModel));
             return View(userModel);
         }
     }

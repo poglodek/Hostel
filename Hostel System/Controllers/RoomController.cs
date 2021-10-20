@@ -28,13 +28,12 @@ namespace Hostel_System.Controllers
         [Route("Details/{id}")]
         public IActionResult Details(int id)
         {
-            var room = _roomServices.GetRoomDto(id);
-            return View(_mapper.Map<Hostel_System.Model.RoomModel>(room));
+            return View(_mapper.Map<Hostel_System.Model.RoomModel>(_roomServices.GetRoomDto(id)));
         }
         [Route("RoomName")]
         public IActionResult RoomName([FromQuery] string SearchParse)
         {
-            if(int.TryParse(SearchParse, out var nevermind))
+            if (int.TryParse(SearchParse, out var nevermind))
                 return RedirectToAction("Details", "Room", new { id = SearchParse });
             return RedirectToAction("Index", "Room", new { page = 0 });
         }
