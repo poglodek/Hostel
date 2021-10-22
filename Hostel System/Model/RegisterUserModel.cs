@@ -12,9 +12,8 @@ namespace Hostel_System.Model
         public string Email { get; set; }
         [DataType(DataType.Password), MinLength(6)]
         public string Password { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime BirthDay { get; set; }
         [Required]
+        public DateTime BirthDay { get; set; }
         public bool IsMale { get; set; }
         [Required, DataType(DataType.PhoneNumber)]
         public int Phone { get; set; }

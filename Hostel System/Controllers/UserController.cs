@@ -68,6 +68,25 @@ namespace Hostel_System.Controllers
             }
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "Admin,Manager")]
+        [HttpGet("/CreateUser")]
+        public IActionResult CreateUser()
+        {
+            return View();
+        }
+        [Authorize(Roles = "Admin,Manager")]
+        [HttpPost("/CreateUser")]
+        public IActionResult CreateUser(RegisterUserModel registerUserModel)
+        {
+            var userId = _userServices.CreateUser(_mapper.Map<RegisterUserDto>(registerUserModel));
+            if (userId == -1)
+            {
+                ViewBag.ErrorMessage = "User Exist!";
+                return View();
+            }
+            ViewBag.Succes = "User Created!";
+            return View();
+        }
         [AllowAnonymous]
         public async Task<IActionResult> SingOut()
         {

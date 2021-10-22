@@ -1,12 +1,11 @@
 ﻿@model Hostel_System.Model.RegisterUserModel
+
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Create User";
     Layout = "_Layout";
 }
 
-
-
-<h2>Register</h2>
+<h2>Create User</h2>
 
 <div >
     @{
@@ -16,10 +15,16 @@
                 @ViewBag.ErrorMessage
             </div>
         }
+        else if (ViewBag.Succes != null)
+        {
+            <div class="alert alert-success">
+                @ViewBag.Succes
+            </div>
+        }
        
     }
     
-    <form asp-controller="User" asp-action="Register">
+    <form asp-controller="User" asp-action="CreateUser">
         
         <div class="form-group">
             <label for="exampleInputEmail1">First Name:</label>
@@ -32,10 +37,6 @@
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input asp-for="Email" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input asp-for="Password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Phone:</label>
@@ -59,7 +60,7 @@
             @Html.CheckBoxFor(m => m.IsMale)
         </div>
         <br/>
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn btn-primary">Create User</button>
     </form>
     
 </div>
