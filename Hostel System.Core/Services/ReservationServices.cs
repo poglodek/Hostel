@@ -46,6 +46,8 @@ namespace Hostel_System.Core.Services
             var user = _userServices.GetUserByEmail(bookToGuestDto.GuestEmail);
             var reservation = _mapper.Map<Reservation>(bookToGuestDto);
             reservation.BookingRoom = _roomServices.GetRoomByName(bookToGuestDto.RoomName);
+            reservation.TotalCost = ((bookToGuestDto.BookingTo - bookToGuestDto.BookingFrom).TotalDays + 1) *
+                                    reservation.BookingRoom.PriceForDay;
             if (!IsRoomFree(reservation))
                 return false;
             reservation.BookingUser = user;

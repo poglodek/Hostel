@@ -15,17 +15,18 @@
     }
        
 }
-<form asp-controller="Reservation" asp-action="Book"> 
+<form asp-controller="Reservation" asp-action="BookToGuest"> 
     <h2>Booking Room: </h2>
     <br /> Remember, day started at 2pm and end with 11 am.
-    <br /> 
-    @Html.HiddenFor(x=> x.PriceForDay)
-    @Html.HiddenFor(x=> x.Id)
-    <p>Price for day: @Html.DisplayFor(x=> x.PriceForDay) $</p>
-    <label for="exampleInputEmail1">Book from:</label>
+    <br />
+    <label>Guest or User Email:</label>
+    @Html.EditorFor(x=> x.GuestEmail)
+    <label>Room name:</label>
+    @Html.EditorFor(x=> x.RoomName)
+    <label>Book from:</label>
     @Html.EditorFor(model => model.BookingFrom, 
         new { htmlAttributes = new { @class = "form-control date-picker" } })<br />
-    <label for="exampleInputEmail1">Book To:</label>
+    <label>Book To:</label>
     @Html.EditorFor(model => model.BookingTo, 
         new { htmlAttributes = new { @class = "form-control date-picker" } })<br />
     <input asp-for="AdditionalInformation" type="text" class="form-control"  placeholder="Additional Information">
@@ -44,3 +45,4 @@
         });
 
     </script>
+}

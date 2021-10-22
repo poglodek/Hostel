@@ -56,7 +56,6 @@ namespace Hostel_System.Controllers
         [Authorize(Roles = "Admin,Manager")]
         public IActionResult BookToGuest()
         {
-            
             return View();
         }
         [HttpPost("BookToGuest")]
@@ -68,16 +67,13 @@ namespace Hostel_System.Controllers
                 ViewBag.ErrorMessage = "Bad setting date!";
                 return View();
             }
-
-            var dto = _mapper.Map<BookToGuestDto>(model);
-            dto.PriceForDay = model.PriceForDay;
-            var result = _reservationServices.BookToGuest(dto);
+            var result = _reservationServices.BookToGuest(_mapper.Map<BookToGuestDto>(model));
             if (result == false)
             {
-                ViewBag.ErrorMessage = "This Date is busy";
+                ViewBag.ErrorMessage = "This Date is busy or Guest not exist!";
                 return View();
             }
-            ViewBag.ErrorMessage = "TODO, room booked!";
+            ViewBag.ErrorMessage = "Room booked!";
             return View();
         }
         [Route("history")]
