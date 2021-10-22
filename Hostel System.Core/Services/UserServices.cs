@@ -74,6 +74,12 @@ namespace Hostel_System.Core.Services
                 .Users
                 .FirstOrDefault(x => x.Id == id);
         }
+        public User GetUserByEmail(string email)
+        {
+            return _hostelSystemDbContext
+                .Users
+                .FirstOrDefault(x => x.Email.Contains(email));
+        }
 
         public ClaimsPrincipal GetClaimsPrincipal(LoginDto loginDto)
         {
@@ -157,13 +163,6 @@ namespace Hostel_System.Core.Services
                 new Claim(ClaimTypes.Role, $"{user.RoleName.RoleName}")
             };
             return claims;
-        }
-        private User GetUserByEmail(string email)
-        {
-            return _hostelSystemDbContext
-                .Users
-                .Include(x => x.RoleName)
-                .FirstOrDefault(x => x.Email.Equals(email));
         }
 
         private bool CheckIfUserExist(string email)

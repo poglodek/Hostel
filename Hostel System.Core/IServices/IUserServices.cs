@@ -11,6 +11,7 @@ public interface IUserServices
     void ForgotPassword(string email);
     bool VerifyUser(LoginDto loginDto);
     User GetUserById(int id);
+    User GetUserByEmail(string email);
     ClaimsPrincipal GetClaimsPrincipal(LoginDto loginDto);
     IEnumerable<UserDto> GetAllUsers();
     IEnumerable<UserDto> GetUsersByName(string searchParse);

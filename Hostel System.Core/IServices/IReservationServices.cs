@@ -6,6 +6,7 @@ namespace Hostel_System.Core.IServices;
 public interface IReservationServices
 {
     bool Book(RoomReservationDto roomReservationDto);
+    bool BookToGuest(BookToGuestDto bookToGuestDto);
     bool IsRoomFree(Reservation reservation);
     IEnumerable<RoomReservedDto> GetMyReservations();
     RoomReservedDto GetReservationDtoById(int id);

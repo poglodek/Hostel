@@ -35,6 +35,21 @@ namespace Hostel_System.Core.Services
 
             if (!IsRoomFree(reservation))
                 return false;
+            reservation.Status = "New";
+            _hostelSystemDbContext.Reservations.Add(reservation);
+            _hostelSystemDbContext.SaveChanges();
+            return true;
+        }
+
+        public bool BookToGuest(BookToGuestDto bookToGuestDto)
+        {
+            var user = _userServices.GetUserByEmail(bookToGuestDto.GuestEmail);
+            var reservation = _mapper.Map<Reservation>(bookToGuestDto);
+            reservation.BookingRoom = _roomServices.GetRoomByName(bookToGuestDto.RoomName);
+            if (!IsRoomFree(reservation))
+                return false;
+            reservation.BookingUser = user;
+            reservation.Status = "New";
             _hostelSystemDbContext.Reservations.Add(reservation);
             _hostelSystemDbContext.SaveChanges();
             return true;

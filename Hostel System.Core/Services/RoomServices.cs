@@ -42,5 +42,13 @@ namespace Hostel_System.Core.Services
                 .Rooms
                 .FirstOrDefault(x => x.Id == id);
         }
+
+        public Room GetRoomByName(string roomName)
+        {
+            return _hostelSystemDbContext
+                .Rooms
+                .FirstOrDefault(x => x.RoomName.Contains(roomName));
+        }
+    }
     }
 }

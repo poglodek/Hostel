@@ -52,6 +52,34 @@ namespace Hostel_System.Controllers
             ViewBag.ErrorMessage = "TODO, room booked!";
             return View();
         }
+        [HttpGet("BookToGuest")]
+        [Authorize(Roles = "Admin,Manager")]
+        public IActionResult BookToGuest()
+        {
+            
+            return View();
+        }
+        [HttpPost("BookToGuest")]
+        [Authorize(Roles = "Admin,Manager")]
+        public IActionResult BookToGuest(BookToGuestModel model)
+        {
+            if (!ModelState.IsValid || (model.BookingFrom - model.BookingTo).TotalDays > 0)
+            {
+                ViewBag.ErrorMessage = "Bad setting date!";
+                return View();
+            }
+
+            var dto = _mapper.Map<BookToGuestDto>(model);
+            dto.PriceForDay = model.PriceForDay;
+            var result = _reservationServices.BookToGuest(dto);
+            if (result == false)
+            {
+                ViewBag.ErrorMessage = "This Date is busy";
+                return View();
+            }
+            ViewBag.ErrorMessage = "TODO, room booked!";
+            return View();
+        }
         [Route("history")]
         public IActionResult History()
         {

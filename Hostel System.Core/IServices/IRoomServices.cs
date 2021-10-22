@@ -8,4 +8,5 @@ public interface IRoomServices
     IEnumerable<RoomDto> GetRooms(int page);
     RoomDto GetRoomDto(int id);
     Room GetRoom(int id);
+    Room GetRoomByName(string roomName);
 }
