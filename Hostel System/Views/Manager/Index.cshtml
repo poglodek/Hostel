@@ -51,7 +51,10 @@
                 <button type="submit"  class="btn btn-outline-success" asp-controller="Reservation" asp-action="ReservationsForDate" >Reservation for Date</button>
             </td>
             <td>
-                
+                @if(User.IsInRole("Admin"))
+                {
+                    <button type="submit"  class="btn btn-outline-primary" asp-controller="User" asp-action="GetUserByName" >Add Room</button>
+                }
             </td>
             <td>
                 <button type="submit"  class="btn btn-outline-primary" asp-controller="User" asp-action="GetUserByPhone" >User by Phone</button>

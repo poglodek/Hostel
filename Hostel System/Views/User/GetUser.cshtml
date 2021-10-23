@@ -3,45 +3,62 @@
 @{
     ViewBag.Title = "User";
     Layout = "_Layout";
+    var userId = Model.Id;
 }
 
 <h2>User:</h2>
-
-<p>
-    First Name: 
-    @Html.DisplayFor(x=> x.FirstName)
-</p>
-<p>
-    Last Name: 
-    @Html.DisplayFor(x=> x.LastName)
-</p>
-<p>
-    Email: 
-    @Html.DisplayFor(x=> x.Email)
-</p>
-<p>
-    Phone: 
-    @Html.DisplayFor(x=> x.Phone)
-</p>
-<p>
-    BirthDay: 
-    @Html.DisplayFor(x=> x.BirthDay)
-</p>
-<p>
-    Is Male: 
-    @Html.DisplayFor(x=> x.IsMale)
-</p>
-<p>
-    Car Registration Number:
-    @Html.DisplayFor(x=> x.CarRegistrationNumber)
-</p>
-<p>
-    Address: 
-    @Html.DisplayFor(x=> x.Address)
-</p>
-
-
-@if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+@using (Html.BeginForm("UpDateRole", "User", FormMethod.Post))
 {
-    <a class="btn btn-outline-danger" asp-area="" asp-controller="User" asp-action="ChangeData"  asp-route-id="@Model.Id">Edit</a>
+    @Html.HiddenFor(x => x.Id)
+    <p>
+        First Name:
+        @Html.DisplayFor(x => x.FirstName)
+    </p>
+    <p>
+        Last Name:
+        @Html.DisplayFor(x => x.LastName)
+    </p>
+    <p>
+        Email:
+        @Html.DisplayFor(x => x.Email)
+    </p>
+    <p>
+        Phone:
+        @Html.DisplayFor(x => x.Phone)
+    </p>
+    <p>
+        BirthDay:
+        @Html.DisplayFor(x => x.BirthDay)
+    </p>
+    <p>
+        Is Male:
+        @Html.DisplayFor(x => x.IsMale)
+    </p>
+    <p>
+        Car Registration Number:
+        @Html.DisplayFor(x => x.CarRegistrationNumber)
+    </p>
+    <p>
+        Address:
+        @Html.DisplayFor(x => x.Address)
+    </p>
+
+
+    @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+    {
+        <a class="btn btn-outline-danger" asp-area="" asp-controller="User" asp-action="ChangeData" asp-route-id="@userId">Edit</a>
+    }
+    @if (User.IsInRole("Admin"))
+    {
+        <h2>Change User Role</h2>
+        @Html.DropDownListFor(x => x.RoleName, new List<SelectListItem>
+        {
+            new SelectListItem { Text = "User", Value = "User" },
+            new SelectListItem { Text = "Manager", Value = "Manager" },
+            new SelectListItem { Text = "Admin", Value = "Admin" }
+
+        })
+
+       <br/> <input type="submit" class="btn btn-outline-secondary" value="Submit"/>
+    }
 }

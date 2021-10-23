@@ -12,7 +12,9 @@ namespace Hostel_System.Dto
             CreateMap<RegisterUserDto, User>().ReverseMap();
             CreateMap<LoginDto, User>().ReverseMap();
             CreateMap<Room, RoomDto>().ReverseMap();
-            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<User, UserDto>()
+                .ForMember(x=>x.RoleName , z=> z.MapFrom(c=> c.RoleName.RoleName))
+                .ReverseMap();
             CreateMap<Room, RoomDto>().ReverseMap();
             CreateMap<BookToGuestDto, Reservation>().ReverseMap();
             CreateMap<RoomReservationDto, Reservation>().ReverseMap();

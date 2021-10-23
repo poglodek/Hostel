@@ -17,5 +17,11 @@ namespace Hostel_System.Core.Services
             return _hostelSystemDbContext.Roles.FirstOrDefault();
         }
 
+        public Role GetRoleByNamme(string roleName)
+        {
+            return _hostelSystemDbContext
+                .Roles
+                .FirstOrDefault(x => x.RoleName.Contains(roleName));
+        }
     }
 }

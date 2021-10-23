@@ -72,12 +72,14 @@ namespace Hostel_System.Core.Services
         {
             return _hostelSystemDbContext
                 .Users
+                .Include(x=>x.RoleName)
                 .FirstOrDefault(x => x.Id == id);
         }
         public User GetUserByEmail(string email)
         {
             return _hostelSystemDbContext
                 .Users
+                .Include(x=> x.RoleName)
                 .FirstOrDefault(x => x.Email.Contains(email));
         }
 
@@ -150,6 +152,14 @@ namespace Hostel_System.Core.Services
         public UserDto GetUserDtoById(int id)
         {
             return _mapper.Map<UserDto>(GetUserById(id));
+        }
+
+        public void UpdateRole(UserDto userDto)
+        {
+            var role = _roleServices.GetRoleByNamme(userDto.RoleName);
+            var user = GetUserById(userDto.Id);
+            user.RoleName = role;
+            _hostelSystemDbContext.SaveChanges();
         }
 
         private List<Claim> GetClaims(User user)

@@ -10,6 +10,7 @@
         public bool IsMale { get; set; }
         public int Phone { get; set; }
         public string Address { get; set; }
+        public string RoleName { get; set; }
         public string? CarRegistrationNumber { get; set; }
     }
 }

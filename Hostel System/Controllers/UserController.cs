@@ -183,5 +183,12 @@ namespace Hostel_System.Controllers
             ViewBag.Result = _userServices.ChangeData(_mapper.Map<UserDto>(userModel));
             return View(userModel);
         }
+        [HttpPost("UpDateRole")]
+        [Authorize(Roles = "Admin,Manager")]
+        public IActionResult UpDateRole(UserModel userModel)
+        {
+            _userServices.UpdateRole(_mapper.Map<UserDto>(userModel));
+            return RedirectToAction("GetUser", "User", new {id = userModel.Id});
+        }
     }
 }

@@ -5,4 +5,5 @@ namespace Hostel_System.Core.IServices;
 public interface IRoleServices
 {
     Role GetDefaultRole();
+    Role GetRoleByNamme(string roleName);
 }

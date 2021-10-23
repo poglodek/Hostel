@@ -20,4 +20,5 @@ public interface IUserServices
     bool ChangePassword(ChangePasswordDto changePasswordDto);
     bool ChangeData(UserDto userDto);
     UserDto GetUserDtoById(int id);
+    void UpdateRole(UserDto userDto);
 }

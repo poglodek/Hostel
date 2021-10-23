@@ -29,12 +29,6 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Manager" asp-action="Index">Manger</a>
                             </li>
                         }
-                        @if(User.IsInRole("Admin"))
-                        {
-                            <li class="nav-item navbar-light">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
-                            </li>
-                        }
                     </ul>
                 @if (User.Identity.IsAuthenticated)
                 {
