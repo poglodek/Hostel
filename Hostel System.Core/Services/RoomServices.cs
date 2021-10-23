@@ -49,6 +49,32 @@ namespace Hostel_System.Core.Services
                 .Rooms
                 .FirstOrDefault(x => x.RoomName.Contains(roomName));
         }
+
+        public bool AddRoom(RoomDto roomDto)
+        {
+            if (RoomExist(roomDto.RoomName)) return false;
+            var room = _mapper.Map<Room>(roomDto);
+            _hostelSystemDbContext.Rooms.Add(room);
+            _hostelSystemDbContext.SaveChanges();
+            return true;
+        }
+
+        public bool EditRoom(RoomDto roomDto)
+        {
+            var room = GetRoom(roomDto.Id);
+            if (room is null) return false;
+            room.RoomName = roomDto.RoomName;
+            room.PriceForDay = roomDto.PriceForDay;
+            room.Description = roomDto.Description;
+            room.MaxPeopleInRoom = roomDto.MaxPeopleInRoom;
+            room.Phone = roomDto.Phone;
+            _hostelSystemDbContext.SaveChanges();
+            return true;
+        }
+
+        private bool RoomExist(string roomName) => _hostelSystemDbContext
+            .Rooms
+            .Any(x => x.RoomName.ToUpper().Equals(roomName.ToUpper()));
     }
     
 }

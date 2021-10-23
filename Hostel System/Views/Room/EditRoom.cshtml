@@ -1,0 +1,46 @@
+﻿@model Hostel_System.Model.RoomModel
+
+@{
+    ViewBag.Title = "Edit room";
+    Layout = "_Layout";
+}
+@{
+    if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+    if (ViewBag.Success != null)
+    {
+        <div class="alert alert-success">
+            @ViewBag.Success
+        </div>
+    }
+}
+
+<h2>Edit Room</h2>
+<form asp-controller="Room" asp-action="EditRoom">
+        @Html.HiddenFor(x=> x.Id)
+    <div class="form-group">
+        <label for="exampleInputEmail1">Room Name:</label>
+        @Html.EditorFor(x=> x.RoomName)
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Description:</label>
+        @Html.EditorFor(x=> x.Description)
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Phone</label>
+        @Html.EditorFor(x=> x.Phone)
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Price For Day</label>
+        @Html.EditorFor(x=> x.PriceForDay)
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Max People In Room:</label>
+        @Html.EditorFor(x=> x.MaxPeopleInRoom)
+    </div>
+    <button type="submit" class="btn btn-primary">Edit Room!</button>
+</form>

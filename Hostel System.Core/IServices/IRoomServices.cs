@@ -9,4 +9,6 @@ public interface IRoomServices
     RoomDto GetRoomDto(int id);
     Room GetRoom(int id);
     Room GetRoomByName(string roomName);
+    bool AddRoom(RoomDto roomDto);
+    bool EditRoom(RoomDto roomDto);
 }
