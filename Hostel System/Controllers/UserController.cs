@@ -162,7 +162,7 @@ namespace Hostel_System.Controllers
             return View();
         }
         [HttpGet("ChangeData/{id}")]
-        public IActionResult ChangeData([FromRoute]int id)
+        public IActionResult ChangeData([FromRoute] int id)
         {
             return View(_mapper.Map<UserModel>(_userServices.GetUserDtoById(id)));
         }
@@ -172,7 +172,7 @@ namespace Hostel_System.Controllers
             return View(_mapper.Map<UserModel>(_userServices.GetUserDtoById(int.Parse(HttpContext.User.FindFirst(x => x.Type == ClaimTypes.NameIdentifier).Value))));
         }
         [HttpPost("ChangeData/{id}")]
-        public IActionResult ChangeData(UserModel userModel, [FromRoute]int id)
+        public IActionResult ChangeData(UserModel userModel, [FromRoute] int id)
         {
             ViewBag.Result = _userServices.ChangeData(_mapper.Map<UserDto>(userModel));
             return View(userModel);
@@ -188,7 +188,7 @@ namespace Hostel_System.Controllers
         public IActionResult UpDateRole(UserModel userModel)
         {
             _userServices.UpdateRole(_mapper.Map<UserDto>(userModel));
-            return RedirectToAction("GetUser", "User", new {id = userModel.Id});
+            return RedirectToAction("GetUser", "User", new { id = userModel.Id });
         }
     }
 }

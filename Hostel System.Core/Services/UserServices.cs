@@ -72,14 +72,14 @@ namespace Hostel_System.Core.Services
         {
             return _hostelSystemDbContext
                 .Users
-                .Include(x=>x.RoleName)
+                .Include(x => x.RoleName)
                 .FirstOrDefault(x => x.Id == id);
         }
         public User GetUserByEmail(string email)
         {
             return _hostelSystemDbContext
                 .Users
-                .Include(x=> x.RoleName)
+                .Include(x => x.RoleName)
                 .FirstOrDefault(x => x.Email.Contains(email));
         }
 

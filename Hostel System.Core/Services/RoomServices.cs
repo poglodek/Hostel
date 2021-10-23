@@ -76,5 +76,5 @@ namespace Hostel_System.Core.Services
             .Rooms
             .Any(x => x.RoomName.ToUpper().Equals(roomName.ToUpper()));
     }
-    
+
 }

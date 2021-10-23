@@ -54,5 +54,7 @@
 {
     <a class="btn btn-success" asp-controller="Room" asp-action="Index" asp-route-page="@pageDown" asp>Back!</a>
 }
-
-<a class="btn btn-success" asp-controller="Room" asp-action="Index" asp-route-page="@pageUp">Next Page!</a>
+@if(Model.Count() == 10)
+{
+    <a class="btn btn-success" asp-controller="Room" asp-action="Index" asp-route-page="@pageUp">Next Page!</a>
+}

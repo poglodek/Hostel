@@ -49,7 +49,7 @@ namespace Hostel_System.Controllers
                 ViewBag.ErrorMessage = "This Date is busy";
                 return View();
             }
-            ViewBag.ErrorMessage = "TODO, room booked!";
+            ViewBag.ErrorMessage = "Room booked!";
             return View();
         }
         [HttpGet("BookToGuest")]
