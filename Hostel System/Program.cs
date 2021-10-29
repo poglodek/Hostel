@@ -13,7 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<HostelSystemDbContext>(options =>
-    options.UseSqlServer("Server=.;Database=HostelSystem;Trusted_Connection=True;"));
+    options.UseSqlServer("Server=sql-server;Database=HostelSystem;User=sa;Password=P@s5Word&;"));
+  //for local db  options.UseSqlServer("Server=.;Database=HostelSystem;Trusted_Connection=True;")); 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 {
     options.LoginPath = "/Login";
@@ -56,3 +57,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+

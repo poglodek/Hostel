@@ -14,7 +14,8 @@ namespace Hostel_System.Database
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=.;Database=HostelSystem;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=sql-server;Database=HostelSystem;User=sa;Password=P@s5Word&;");
+            //for local db optionsBuilder.UseSqlServer("Server=.;Database=HostelSystem;Trusted_Connection=True;");
         }
 
 
